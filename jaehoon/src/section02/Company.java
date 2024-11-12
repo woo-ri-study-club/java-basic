@@ -1,6 +1,6 @@
 package section02;
 
-class Company {
+public class Company {
 
   private final Employee[] employees;
 

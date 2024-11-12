@@ -1,6 +1,6 @@
 package section02;
 
-class Employee {
+public class Employee {
 
   private String name;
 
