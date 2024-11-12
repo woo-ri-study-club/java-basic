@@ -15,6 +15,6 @@ public class Employees {
     public void findPosition(final String position) {
         employees.stream()
                 .filter(employee -> employee.getPosition().equals(position))
-                .forEach(employee -> System.out.println("Position: " + employee.getPosition() + ", Name: " + employee.getName() + ", salary: " + employee.getSalary()));
+                .forEach(employee -> employee.printInfo());
     }
 }

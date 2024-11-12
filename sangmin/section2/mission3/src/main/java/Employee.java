@@ -24,4 +24,10 @@ public class Employee {
     public Integer getSalary() {
         return salary;
     }
+
+    public void printInfo() {
+        System.out.println("name = " + name);
+        System.out.println("position = " + position);
+        System.out.println("salary = " + salary);
+    }
 }
