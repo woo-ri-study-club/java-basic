@@ -11,8 +11,7 @@ public class MediumEx {
         };
 
         for (Student student : students) {
-            Student s = student;
-            System.out.println("이름: " + s.getName() + ", 나이: " + s.getAge() + ", 등급: " + s.getGrade());
+            System.out.println("이름: " + student.getName() + ", 나이: " + student.getAge() + ", 등급: " + student.getGrade());
         }
 
     }

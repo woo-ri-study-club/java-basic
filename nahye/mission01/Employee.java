@@ -1,9 +1,9 @@
 package mission01;
 
 public class Employee {
-    String name;
-    String position;
-    int salary;
+    private final String name;
+    private final String position;
+    private final int salary;
 
     public Employee(String name, String position, int salary) {
         this.name = name;
