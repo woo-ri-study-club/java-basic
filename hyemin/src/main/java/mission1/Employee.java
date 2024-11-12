@@ -22,4 +22,8 @@ public class Employee {
     public int getSalary() {
         return salary;
     }
+
+    public boolean isPosition(String position) {
+        return this.position.equalsIgnoreCase(position);
+    }
 }

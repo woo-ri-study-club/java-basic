@@ -54,8 +54,10 @@ public class CarMain {
 인스턴스는 특정 클래스로부터 생성된 객체를 의미한다. 그래서 객체와 인스턴스라는 용어는 자주 혼용된다. 인스턴스 는 주로 객체가 어떤 클래스에 속해 있는지 강조할 때 사용한다. 예를 들어서 `student1` 객체는 `Student` 클래스의 인스턴스다. 라고 표현한다.
 
 #### 객체 vs 인스턴스
-둘다 클래스에서 나온 실체라는 의미에서 비슷하게 사용되지만, 용어상 인스턴스는 객체보다 좀 더 관계에 초점을 맞춘 단어이다. 보통 `student1` 은 `Student` 의 객체이다. 라고 말하는 대신 `student1` 은 `Student` 의 인스턴스이다. 라고 특정 클래스와의 관계를 명확히 할 때 인스턴스라는 용어를 주로 사용한다.
-좀 더 쉽게 풀어보자면, 모든 인스턴스는 객체이지만, 우리가 인스턴스라고 부르는 순간은 특정 클래스로부터 그 객체가 생성되었음을 강조하고 싶을 때이다. 예를 들어 `student1` 은 객체이지만, 이 객체가 `Student` 클래스로부터 생성되 다는 점을 명확히 하기 위해 `student1` 을 `Student` 의 인스턴스라고 부른다.
+둘다 클래스에서 나온 실체라는 의미에서 비슷하게 사용되지만, 용어상 인스턴스는 객체보다 좀 더 관계에 초점을 맞춘 단어이다. 보통 `student1` 은 `Student` 의 객체이다. 라고 말하는 대신 
+`student1` 은 `Student` 의 인스턴스이다. 라고 특정 클래스와의 관계를 명확히 할 때 인스턴스라는 용어를 주로 사용한다.
+좀 더 쉽게 풀어보자면, 모든 인스턴스는 객체이지만, 우리가 인스턴스라고 부르는 순간은 특정 클래스로부터 그 객체가 생성되었음을 강조하고 싶을 때이다. 
+예를 들어 `student1` 은 객체이지만, 이 객체가 `Student` 클래스로부터 생성되었다는 점을 명확히 하기 위해 `student1` 을 `Student` 의 인스턴스라고 부른다.
 하지만 둘다 클래스에서 나온 실체라는 핵심 의미는 같기 때문에 보통 둘을 구분하지 않고 사용한다.
 
 ```java
@@ -131,6 +133,10 @@ public class Employee {
     public int getSalary() {
         return salary;
     }
+
+    public boolean isPosition(String position) {
+        return this.position.equalsIgnoreCase(position);
+    }
 }
 ```
 ```java
@@ -147,7 +153,7 @@ public class Company {
 
     public void findByPosition(String position){
         for (Employee employee : employees) {
-            if (employee.getPosition().equalsIgnoreCase(position)) {
+            if (employee.isPosition(position)) {
                 System.out.println("이름: " + employee.getName() + ", 직책: " + employee.getPosition() + ", 급여: " + employee.getSalary());
             }
         }
