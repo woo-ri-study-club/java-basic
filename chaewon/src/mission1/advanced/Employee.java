@@ -15,19 +15,12 @@ public class Employee {
         return new Employee(name, position, salary);
     }
 
-    public String getName() {
-        return name;
+    public boolean isPosition(String position){
+        return position.equalsIgnoreCase(this.position);
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public void printEmployee() {
-        System.out.println("성함: " + this.getName() + " | 직급: " + this.getPosition() + " | 월급: " + this.getSalary());
+    @Override
+    public String toString() {
+        return "성함: " + name + " | 직급: " + position + " | 월급: " + salary;
     }
 }

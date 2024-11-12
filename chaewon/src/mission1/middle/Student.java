@@ -11,7 +11,7 @@ public class Student {
         this.grade = grade;
     }
 
-    public static Student of(String name, int age, int grade){
+    public static Student of(String name, int age, int grade) {
         return new Student(name, age, grade);
     }
 
@@ -25,5 +25,10 @@ public class Student {
 
     public int getGrade() {
         return grade;
+    }
+
+    @Override
+    public String toString() {
+        return "학생 이름: " + this.name + " | 나이: " + this.age + " | 성적: " + this.grade;
     }
 }

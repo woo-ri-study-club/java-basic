@@ -11,7 +11,7 @@ public class MiddleMain {
         };
 
         for (Student student : students) {
-            System.out.println("학생 이름: " + student.getName() + " | 나이: " + student.getAge() + " | 성적: " + student.getGrade());
+            System.out.println(student);
         }
     }
 }
