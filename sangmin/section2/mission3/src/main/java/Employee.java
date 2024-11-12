@@ -1,7 +1,7 @@
 public class Employee {
     private final String name;
     private final String position;
-    private final Integer salary;
+    private final int salary;
 
     private Employee(final String name, final String position, final Integer salary) {
         this.name = name;
@@ -9,7 +9,7 @@ public class Employee {
         this.salary = salary;
     }
 
-    public static Employee create(final String name, final String position, final Integer salary) {
+    public static Employee create(final String name, final String position, final int salary) {
         return new Employee(name, position, salary);
     }
 
@@ -21,7 +21,7 @@ public class Employee {
         return position;
     }
 
-    public Integer getSalary() {
+    public int getSalary() {
         return salary;
     }
 
@@ -29,5 +29,9 @@ public class Employee {
         System.out.println("name = " + name);
         System.out.println("position = " + position);
         System.out.println("salary = " + salary);
+    }
+
+    public boolean equalsPosition(final String position) {
+        return this.position.equals(position);
     }
 }
