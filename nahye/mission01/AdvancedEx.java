@@ -32,33 +32,27 @@ public class AdvancedEx {
 
         if (foundEmployees.length == 0) {
             System.out.println("입력한 직책의 직원이 없습니다.");
-        }else {
-            for (Employee foundEmployee : foundEmployees) {
-                if (foundEmployee != null) {
-                    System.out.println("이름: " + foundEmployee.getName() + ", 연봉: " + foundEmployee.getSalary());
-                }
-            }
+            return;
+        }
+
+        for (Employee foundEmployee : foundEmployees) {
+            System.out.println("이름: " + foundEmployee.getName() + ", 연봉: " + foundEmployee.getSalary());
         }
     }
 
     public static Employee[] findByPosition(String position, Employee[] employees) {
 
-        int count=0;
+        Employee[] temp = new Employee[employees.length];
+        int count = 0;
 
-        for(Employee employee: employees){
-            if(employee.getPosition().equals(position)){
-                count++;
-            }
-        }
-
-        Employee[] result = new Employee[count];
-        int index=0;
-
-        for(Employee employee : employees){
+        for (Employee employee : employees) {
             if (employee.getPosition().equals(position)) {
-                result[index++] = employee;
+                temp[count++] = employee;
             }
         }
+        Employee[] result = new Employee[count];
+        System.arraycopy(temp, 0, result, 0, count);
+
         return result;
     }
 }
