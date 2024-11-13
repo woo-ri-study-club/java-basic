@@ -21,7 +21,7 @@ public class Main {
         Employee[] findedEmployee = findByPosition("사원");
 
         for (Employee employee : findedEmployee) {
-            employee.printInfo();
+            System.out.println(employee.toString());
         }
     }
 
