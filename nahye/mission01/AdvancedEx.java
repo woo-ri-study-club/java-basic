@@ -1,6 +1,5 @@
 package mission01;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class AdvancedEx {
@@ -16,30 +15,50 @@ public class AdvancedEx {
                 new Employee("장하나", "사원", 3000)
         };
 
+        String inputPosition = readPositionFromUser();
+        displayEmployeesByPosition(inputPosition, employees);
+    }
+
+    private static String readPositionFromUser() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("직책(사장, 부장, 팀장, 대리, 사원)을 입력하세요 : ");
         String inputPosition = scanner.nextLine().trim();
+        return inputPosition;
+    }
+
+    private static void displayEmployeesByPosition(String inputPosition, Employee[] employees) {
 
         Employee[] foundEmployees = findByPosition(inputPosition, employees);
 
         if (foundEmployees.length == 0) {
             System.out.println("입력한 직책의 직원이 없습니다.");
-        }
-        for (Employee foundEmployee : foundEmployees) {
-            if (foundEmployee != null) {
-                System.out.println("이름: " + foundEmployee.getName() + ", 연봉: " + foundEmployee.getSalary());
+        }else {
+            for (Employee foundEmployee : foundEmployees) {
+                if (foundEmployee != null) {
+                    System.out.println("이름: " + foundEmployee.getName() + ", 연봉: " + foundEmployee.getSalary());
+                }
             }
         }
     }
+
     public static Employee[] findByPosition(String position, Employee[] employees) {
-        Employee[] result = new Employee[employees.length];
-        int count = 0;
-        for (int i = 0; i < employees.length; i++) {
-            if (employees[i].getPosition().equals(position)) {
-                result[count] = employees[i];
+
+        int count=0;
+
+        for(Employee employee: employees){
+            if(employee.getPosition().equals(position)){
                 count++;
             }
         }
-        return Arrays.copyOf(result, count);
+
+        Employee[] result = new Employee[count];
+        int index=0;
+
+        for(Employee employee : employees){
+            if (employee.getPosition().equals(position)) {
+                result[index++] = employee;
+            }
+        }
+        return result;
     }
 }
