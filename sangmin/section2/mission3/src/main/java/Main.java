@@ -1,11 +1,10 @@
 import java.util.Arrays;
 
 public class Main {
-    private static Employee[] employees;
 
     public static void main(String[] args) {
 
-        employees = new Employee[]{
+        Employee[] employees = {
                 Employee.create("사원1", "사원", 2000),
                 Employee.create("사원2", "사원", 2000),
                 Employee.create("사원3", "사원", 2000),
@@ -18,14 +17,14 @@ public class Main {
                 Employee.create("부장3", "부장", 10000),
                 Employee.create("이사1", "이사", 20000)};
 
-        Employee[] findedEmployee = findByPosition("사원");
+        Employee[] findedEmployee = findByPosition(employees, "사원");
 
         for (Employee employee : findedEmployee) {
-            employee.printInfo();
+            System.out.println(employee.toString());
         }
     }
 
-    private static Employee[] findByPosition(String position) {
+    private static Employee[] findByPosition(Employee[] employees, String position) {
         return Arrays.stream(employees)
                 .filter(employee -> employee.equalsPosition(position))
                 .toArray(Employee[]::new);

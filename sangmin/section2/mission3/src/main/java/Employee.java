@@ -13,25 +13,16 @@ public class Employee {
         return new Employee(name, position, salary);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public int getSalary() {
-        return salary;
-    }
-
-    public void printInfo() {
-        System.out.println("name = " + name);
-        System.out.println("position = " + position);
-        System.out.println("salary = " + salary);
-    }
-
     public boolean equalsPosition(final String position) {
         return this.position.equals(position);
+    }
+
+    @Override
+    public String toString() {
+        return """
+            name = %s
+            position = %s
+            salary = %d
+            """.formatted(name, position, salary);
     }
 }
