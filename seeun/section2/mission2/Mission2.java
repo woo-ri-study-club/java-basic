@@ -19,7 +19,7 @@ public class Mission2 {
         };
 
         for (Student student : students) {
-            System.out.println("이름: " + student.getName() + ", 나이: " + student.getAge() + ", 성적: " + student.getGrade());
+            System.out.println(student);
         }
     }
 

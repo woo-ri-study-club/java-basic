@@ -23,4 +23,13 @@ public class Student {
     public int getGrade() {
         return grade;
     }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", grade=" + grade +
+                '}';
+    }
 }
