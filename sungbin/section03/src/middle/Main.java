@@ -8,14 +8,18 @@ public class Main {
         System.out.println("변경 전 number = " + number);
         System.out.println("변경 전 arr[0] = " + arr[0]);
 
-        modifyValues(number, arr);
+        number = modifyNumber(number);
+        modifyArray(arr);
 
         System.out.println("변경 후 number = " + number);
         System.out.println("변경 후 arr[0] = " + arr[0]);
     }
 
-    static void modifyValues(int number, int[] array) {
-        number += 10;
+    static int modifyNumber(int number) {
+        return number + 10;
+    }
+
+    static void modifyArray(int[] array) {
         array[0] += 10;
     }
 }
