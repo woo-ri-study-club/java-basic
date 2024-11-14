@@ -2,6 +2,8 @@ package section03;
 
 import java.util.Arrays;
 
+import static java.util.Objects.nonNull;
+
 public class Library {
 
   private static final int DEFAULT_CAPACITY = 10;
@@ -29,18 +31,17 @@ public class Library {
 
   public Book searchByTitle(String title) {
     for (Book book : books) {
-      if (book.getTitle().equalsIgnoreCase(title)) {
+      if (nonNull(book) && book.isTitle(title)) {
         return book;
       }
     }
+    System.out.println("해당 제목의 도서가 존재하지 않습니다.");
     return null;
   }
 
   public void printBooks() {
     for (int i = 0; i < bookCount; i++) {
-      System.out.println(String.format("제목 = %s, 가격 = %d",
-                                       books[i].getTitle(),
-                                       books[i].getPrice()));
+      System.out.println(books[i]);
     }
   }
 }

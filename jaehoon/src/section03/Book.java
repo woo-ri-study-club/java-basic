@@ -18,4 +18,16 @@ public class Book {
   public int getPrice() {
     return price;
   }
+
+  public boolean isTitle(String title) {
+    return this.title.equalsIgnoreCase(title);
+  }
+
+  @Override
+  public String toString() {
+    return "Book{" +
+        "제목='" + title + '\'' +
+        ", 가격=" + price +
+        '}';
+  }
 }

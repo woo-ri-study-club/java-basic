@@ -20,13 +20,21 @@ public class BookTest {
     System.out.println("### 헤드퍼스트디자인패턴, 객체지향의사실과오해, 오브젝트, 이펙티브자바, 자바의정석 책 등록 ###");
     System.out.println();
 
-    Book book1 = library.searchByTitle("오브젝트");
     System.out.println("### 책 타이틀 검색: 오브젝트 ###");
-    System.out.println("제목 = " + book1.getTitle());
-    System.out.println("가격 = " + book1.getPrice());
+    Book obejctBook = library.searchByTitle("오브젝트");
+    System.out.println("제목 = " + obejctBook.getTitle());
+    System.out.println("가격 = " + obejctBook.getPrice());
     System.out.println();
 
     System.out.println("### 라이브러리에 있는 모든 책 정보조회 ###");
     library.printBooks();
+    System.out.println();
+
+    // NullPointException이 발생하도록 null인 데이터에 접근
+    System.out.println("### 책 타이틀 검색: null ###");
+    Book nullBook = library.searchByTitle(null);
+    System.out.println("제목 = " + nullBook.getTitle());
+    System.out.println("가격 = " + nullBook.getPrice());
+    System.out.println();
   }
 }
