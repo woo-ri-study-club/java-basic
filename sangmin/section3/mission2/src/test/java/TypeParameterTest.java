@@ -14,7 +14,7 @@ public class TypeParameterTest {
         Assertions.assertEquals(10, a);
     }
 
-    public void changeInteger(int a) {
+    private void changeInteger(int a) {
         a = 20;
     }
 
@@ -29,7 +29,7 @@ public class TypeParameterTest {
         Assertions.assertEquals(100, arr[0]);
     }
 
-    public void changeArray(int[] arr) {
+    private void changeArray(int[] arr) {
         arr[0] = 100;
     }
 }
