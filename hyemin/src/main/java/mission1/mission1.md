@@ -137,6 +137,11 @@ public class Employee {
     public boolean isPosition(String position) {
         return this.position.equalsIgnoreCase(position);
     }
+
+    @Override
+    public String toString() {
+        return "이름: " + name + ", 직책: " + position + ", 급여: " + salary;
+    }
 }
 ```
 ```java
@@ -154,7 +159,7 @@ public class Company {
     public void findByPosition(String position){
         for (Employee employee : employees) {
             if (employee.isPosition(position)) {
-                System.out.println("이름: " + employee.getName() + ", 직책: " + employee.getPosition() + ", 급여: " + employee.getSalary());
+                System.out.println(employee);
             }
         }
     }

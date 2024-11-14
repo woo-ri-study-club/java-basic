@@ -26,4 +26,9 @@ public class Employee {
     public boolean isPosition(String position) {
         return this.position.equalsIgnoreCase(position);
     }
+
+    @Override
+    public String toString() {
+        return "이름: " + name + ", 직책: " + position + ", 급여: " + salary;
+    }
 }
