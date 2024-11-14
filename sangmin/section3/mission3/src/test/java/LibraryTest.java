@@ -1,7 +1,7 @@
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
 class LibraryTest {
@@ -39,8 +39,9 @@ class LibraryTest {
         Library library = new Library(books);
 
         // when & then
-        Assertions.assertThrows(NullPointerException.class, () -> {
+        assertThatThrownBy(() -> {
             library.getBooks()[1].getTitle();
-        });
+        }).isInstanceOf(NullPointerException.class)
+                .hasMessage("Cannot invoke \"Book.getTitle()\" because \"Library.getBooks()[1]\" is null");
     }
 }
