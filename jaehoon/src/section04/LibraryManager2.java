@@ -57,7 +57,7 @@ public class LibraryManager2 {
   // 제목으로 도서 검색
   static Book searchByTitle(String title) {
     for (Book book : books) {
-      if (book.isTitle(title)) {
+      if (book.matchesTitle(title)) {
         return book;
       }
     }
@@ -68,7 +68,7 @@ public class LibraryManager2 {
   // 도서번호로 도서 검색
   static Book searchByIsBn(String isBn) {
     for (Book book : books) {
-      if (book.isIsBn(isBn)) {
+      if (book.matchesIsBn(isBn)) {
         return book;
       }
     }
@@ -82,7 +82,7 @@ public class LibraryManager2 {
     Iterator<Book> iterator = books.iterator();
     while (iterator.hasNext()) {
       Book book = iterator.next();
-      if (book.isIsBn(isBn)) {
+      if (book.matchesIsBn(isBn)) {
         iterator.remove();
       }
     }

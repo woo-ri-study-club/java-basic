@@ -16,7 +16,6 @@ public class Book {
     this.title = title;
     this.author = author;
     this.isBn = isBn;
-    this.isCheckedOut = false;
   }
 
   public String getTitle() {
@@ -32,35 +31,30 @@ public class Book {
   }
 
   public boolean isCheckedOut() {
-    return this.isCheckedOut;
+    return isCheckedOut;
   }
-
-  public boolean isNotCheckedOut() {
-    return !isCheckedOut();
-  }
-
 
   // 도서명 확인 메서드
-  public boolean isTitle(String title) {
+  public boolean matchesTitle(String title) {
     return this.title.equalsIgnoreCase(title);
   }
 
   // 도서번호 확인 메서드
-  public boolean isIsBn(String isBn) {
+  public boolean matchesIsBn(String isBn) {
     return this.isBn.equalsIgnoreCase(isBn);
   }
 
   // 도서 대출 상태로 설정하는 메서드
-  public void markAsCheckedOut() throws IllegalStateException {
-    if (isCheckedOut()) {
+  public void checkout() throws IllegalStateException {
+    if (isCheckedOut) {
       throw new IllegalStateException("이미 대출된 도서입니다.");
     }
     isCheckedOut = true;
   }
 
   // 도서 반납 상태로 설정하는 메서드
-  public void markAsUnCheckedOut() throws IllegalStateException {
-    if (isNotCheckedOut()) {
+  public void returnBook() throws IllegalStateException {
+    if (!isCheckedOut) {
       throw new IllegalStateException("이 도서는 대출 상태가 아닙니다.");
     }
     isCheckedOut = false;

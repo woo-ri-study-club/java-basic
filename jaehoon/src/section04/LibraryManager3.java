@@ -27,21 +27,28 @@ public class LibraryManager3 {
     library.deleteByIsBn("5555");
     System.out.println();
 
+    System.out.println("도서번호('5555')를 대출합니다.");
+    library.checkOutBook("5555");
+    System.out.println();
+
+    System.out.println("도서번호('6666')인 도서를 삭제합니다.");
+    library.deleteByIsBn("6666");
+    System.out.println();
 
     System.out.println("도서 삭제 후 전체 도서 목록:");
     library.printAllBooks();
     System.out.println();
 
-    System.out.println("삭제한 도서번호('5555')를 대출합니다.");
-    library.checkOutBook("5555");
-    System.out.println();
-
     System.out.println("도서번호('2222')를 대출합니다.");
     library.checkOutBook("2222");
     System.out.println();
 
     System.out.println("도서번호('2222')를 대출합니다.");
     library.checkOutBook("2222");
+    System.out.println();
+
+    System.out.println("도서번호('2222')인 도서를 삭제합니다.");
+    library.deleteByIsBn("2222");
     System.out.println();
 
     System.out.println("대출 가능한 도서 목록을 출력합니다.");
