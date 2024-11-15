@@ -50,16 +50,16 @@ public class Book {
     return this.isBn.equalsIgnoreCase(isBn);
   }
 
-  // 도서 대출 메서드
-  void checkOut() throws IllegalStateException {
+  // 도서 대출 상태로 설정하는 메서드
+  public void markAsCheckedOut() throws IllegalStateException {
     if (isCheckedOut()) {
       throw new IllegalStateException("이미 대출된 도서입니다.");
     }
     isCheckedOut = true;
   }
 
-  // 도서 반납 메서드
-  public void returnBook() throws IllegalStateException {
+  // 도서 반납 상태로 설정하는 메서드
+  public void markAsUnCheckedOut() throws IllegalStateException {
     if (isNotCheckedOut()) {
       throw new IllegalStateException("이 도서는 대출 상태가 아닙니다.");
     }

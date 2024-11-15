@@ -65,7 +65,7 @@ public class Library {
   void checkOutBook(String isBn) {
     try {
       Book book = searchByIsBn(isBn);
-      book.checkOut();
+      book.markAsCheckedOut();
       System.out.println("도서가 대출되었습니다: " + book);
     } catch (IllegalStateException illegalStateException) {
       System.out.println(illegalStateException.getMessage());
@@ -78,7 +78,7 @@ public class Library {
     Book book = searchByIsBn(isBn);
     if (nonNull(book)) {
       try {
-        book.returnBook();
+        book.markAsUnCheckedOut();
         System.out.println("도서가 반납되었습니다: " + book);
       } catch (IllegalStateException illegalStateException) {
         System.out.println(illegalStateException.getMessage());
