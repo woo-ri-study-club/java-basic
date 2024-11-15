@@ -2,8 +2,7 @@ package section04;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Objects.nonNull;
+import java.util.Optional;
 
 public class Library {
 
@@ -32,24 +31,23 @@ public class Library {
   }
 
   // 제목으로 도서 검색
-  Book searchByTitle(String title) {
+  Optional<Book> searchByTitle(String title) {
     for (Book book : this.books) {
       if (book.isTitle(title)) {
-        return book;
+        return Optional.of(book);
       }
     }
-    System.out.println("검색한 도서가 존재하지 않습니다.");
-    return null;
+    return Optional.empty();
   }
 
   // 도서번호로 도서 검색
-  Book searchByIsBn(String isBn) {
+  Optional<Book> searchByIsBn(String isBn) {
     for (Book book : this.books) {
       if (book.isIsBn(isBn)) {
-        return book;
+        return Optional.of(book);
       }
     }
-    throw new IllegalStateException("검색한 도서가 존재하지 않습니다.");
+    return Optional.empty();
   }
 
   // 도서 삭제 (removeIf를 사용)
@@ -64,25 +62,22 @@ public class Library {
   // 도서 대출
   void checkOutBook(String isBn) {
     try {
-      Book book = searchByIsBn(isBn);
+      Book book = searchByIsBn(isBn).orElseThrow(() -> new IllegalStateException("검색한 도서가 존재하지 않습니다."));
       book.markAsCheckedOut();
       System.out.println("도서가 대출되었습니다: " + book);
     } catch (IllegalStateException illegalStateException) {
-      System.out.println(illegalStateException.getMessage());
-      System.out.println("대출을 실행할 수 없습니다.");
+      System.out.println(illegalStateException.getMessage() + " 대출을 실행할 수 없습니다.");
     }
   }
 
   // 도서 반납
   void returnBook(String isBn) {
-    Book book = searchByIsBn(isBn);
-    if (nonNull(book)) {
-      try {
-        book.markAsUnCheckedOut();
-        System.out.println("도서가 반납되었습니다: " + book);
-      } catch (IllegalStateException illegalStateException) {
-        System.out.println(illegalStateException.getMessage());
-      }
+    try {
+      Book book = searchByIsBn(isBn).orElseThrow(() -> new IllegalStateException("검색한 도서가 존재하지 않습니다."));
+      book.markAsUnCheckedOut();
+      System.out.println("도서가 반납되었습니다: " + book);
+    } catch (IllegalStateException illegalStateException) {
+      System.out.println(illegalStateException.getMessage() + " 반납을 실행할 수 없습니다.");
     }
   }
 
