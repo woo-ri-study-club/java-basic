@@ -1,25 +1,20 @@
-package mission3.middle;
+package mission3.advanced;
 
 import java.util.Objects;
 
 public class Book {
-    private String title;
-    private String author;
-    private String isbn;
+    private final String title;
+    private final String author;
+    private final String isbn;
 
-    private Book(String title, String author, String isbn) {
+    public Book(String title, String author, String isbn) {
+        if (title.isBlank() || author.isBlank() || isbn.isBlank()) {
+            throw new IllegalArgumentException("도서명, 작가, ISBN 필드를 모두 입력해야 합니다.");
+        }
+
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-    }
-
-    public static Book createBook(String title, String author, String isbn) {
-        if (title.isBlank() || author.isBlank() || isbn.isBlank()) {
-            System.out.println("도서명, 작가, ISBN 필드를 모두 입력해야 합니다.");
-            return null;
-        }
-
-        return new Book(title, author, isbn);
     }
 
     public boolean isTitleContaining(String title) {
