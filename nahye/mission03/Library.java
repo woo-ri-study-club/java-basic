@@ -16,7 +16,7 @@ public class Library {
 
     public void addBook(String title, String author, String isBn) {
         books.add(new Book(title, author, isBn));
-        System.out.println("목록에 추가된 책: "+title);
+        System.out.println("목록에 추가된 책: " + title);
     }
 
     public void displayAllBooks() {
@@ -39,7 +39,7 @@ public class Library {
 
     public void deleteBookByIsBn(String isBn) {
         for (Book book : books) {
-            if (book.toString().equals(isBn)) {
+            if (book.getIsBn().equals(isBn)) {
                 books.remove(book);
                 System.out.println("책을 삭제합니다.");
                 return;
@@ -50,24 +50,30 @@ public class Library {
 
     public void displayAvailableBooks() {
         System.out.println("=== 대출 가능한 도서 목록 ===");
-        for (Book book : books) {
-            if (book.isCheckedOut()) continue;
+        List<Book> availableBooks = getAvailableBooks();
+        for (Book book : availableBooks) {
             System.out.println(book);
         }
     }
 
-    public void borrowBookByTitle(String title){
-        for(Book book:books){
-            if(book.getTitle().equals(title)){
-                if(book.isCheckedOut()){
-                    System.out.println("도서가 현재 대출중입니다.");
-                }else{
-                    System.out.println(title+"가 대출되었습니다.");
-                }
+    public List<Book> getAvailableBooks() {
+        List<Book> availableBooks = new ArrayList<>();
+        for (Book book : books) {
+            if (book.isCheckedOut()) continue;
+            availableBooks.add(book);
+        }
+        return availableBooks;
+    }
+
+    public void borrowBookByTitle(String title) {
+        for (Book book : books) {
+            if (book.getTitle().equals(title)) {
+                book.checkout();
+                System.out.println(title + "가 대출되었습니다.");
                 return;
             }
         }
-        System.out.println("제목이 " + title + "인 책이 없습니다.");
+        throw new IllegalStateException("존재하지 않는 도서입니다.");
     }
 
 }

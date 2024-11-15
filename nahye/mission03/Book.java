@@ -38,13 +38,25 @@ public class Book {
         return isCheckedOut;
     }
 
-    public void setCheckedOut(boolean checkedOut) {
-        isCheckedOut = checkedOut;
+    // 대출 처리
+    public void checkout() {
+        if (isCheckedOut) {
+            throw new IllegalStateException("이미 대출된 도서입니다.");
+        }
+        this.isCheckedOut = true;
+    }
+
+    // 반납 처리
+    public void returnBook() {
+        if (!isCheckedOut) {
+            throw new IllegalStateException("이미 반납된 도서입니다.");
+        }
+        this.isCheckedOut = false;
     }
 
     @Override
     public String toString() {
-        return "제목: " + title + ", 저자: " + author + ", ISBN: " + isBn;
+        return "제목: " + title + ", 저자: " + author + ", ISBN: " + isBn + ", 대출가능: " + (isCheckedOut ? "불가" : "가능");
     }
 
     @Override
@@ -52,7 +64,7 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(isBn, book.isBn);
+        return Objects.equals(isBn, book.isBn);
     }
 
 }
