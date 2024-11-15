@@ -42,11 +42,38 @@ public class Library {
         return foundBooks;
     }
 
+    public List<Book> readBooksCanBeLoaned() {
+        List<Book> foundBooks = new ArrayList<>();
+
+        for (Book book:books){
+            if (book.canBeLoaned()){
+                foundBooks.add(book);
+            }
+        }
+
+        if (foundBooks.isEmpty()) {
+            throw new IllegalArgumentException("대출 가능한 도서가 없습니다.");
+        }
+
+        return foundBooks;
+    }
+
     public void deleteBook(String isbn) {
         boolean isRemoved = books.removeIf(book -> book.isSameIsbn(isbn));
 
         if (!isRemoved){
             throw new IllegalArgumentException("해당 ISBN 도서가 존재하지 않습니다.");
         }
+    }
+
+    public void loanBook(List<Book> availableBooks, String isbn) {
+        for (Book book:availableBooks){
+            if (book.isSameIsbn(isbn)){
+                book.updateIsCheckedToTrue();
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("존재하지 않거나 대출 가능한 도서가 아닙니다.");
     }
 }

@@ -14,7 +14,7 @@ public class LibraryManager {
         while (isLibraryManagerOn) {
             try {
                 System.out.println("=======도서 관리 시스템=======");
-                System.out.println("1. 도서 추가 | 2. 도서 조회 | 3. 도서 검색 | 4. 도서 삭제 | 5. 프로그램 종료");
+                System.out.println("1. 도서 추가 | 2. 도서 조회 | 3. 도서 검색 | 4. 도서 삭제 | 5. 도서 대출 | 6. 프로그램 종료");
                 int selectMenuNumber = SCANNER.nextInt();
                 SCANNER.nextLine();
 
@@ -56,6 +56,16 @@ public class LibraryManager {
                         break;
 
                     case 5:
+                        System.out.println("대출하실 도서의 ISBN을 입력하세요. (아래에 대출 가능한 목록만 출력됩니다.)");
+
+                        List<Book> availableBooks = library.readBooksCanBeLoaned();
+                        printBookList(availableBooks);
+
+                        isbn = inputString();
+                        library.loanBook(availableBooks, isbn);
+                        break;
+
+                        case 6:
                         isLibraryManagerOn = turnOffManager();
                         break;
 

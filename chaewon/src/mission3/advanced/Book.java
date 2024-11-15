@@ -6,6 +6,7 @@ public class Book {
     private final String title;
     private final String author;
     private final String isbn;
+    private boolean isChecked;
 
     public Book(String title, String author, String isbn) {
         if (title.isBlank() || author.isBlank() || isbn.isBlank()) {
@@ -15,14 +16,27 @@ public class Book {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
+        this.isChecked = false;
     }
 
     public boolean isTitleContaining(String title) {
         return this.title.toLowerCase().contains(title);
     }
 
+    public boolean isSameTitle(String title) {
+        return title.equalsIgnoreCase(this.title);
+    }
+
     public boolean isSameIsbn(String isbn) {
         return isbn.equalsIgnoreCase(this.isbn);
+    }
+
+    public boolean canBeLoaned(){
+        return !isChecked;
+    }
+
+    public void updateIsCheckedToTrue(){
+        isChecked = true;
     }
 
     @Override
