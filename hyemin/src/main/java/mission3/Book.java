@@ -6,6 +6,7 @@ public class Book {
     private String name;
     private String author;
     private String isBn;
+    private boolean isCheckedOut;
 
     private Book(String name, String author, String isBn) {
         this.name = name;
@@ -27,6 +28,18 @@ public class Book {
 
     public String getIsBn() {
         return isBn;
+    }
+
+    public boolean isCheckedOut() {
+        return isCheckedOut;
+    }
+
+    public void checkOut() {
+        isCheckedOut = true;
+    }
+
+    public void returnBook() {
+        isCheckedOut = false;
     }
 
     @Override
