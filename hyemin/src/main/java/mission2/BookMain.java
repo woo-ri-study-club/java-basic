@@ -14,21 +14,11 @@ public class BookMain {
         }
 
         try {
-            printBookDetails(library, books[0].getTitle());
-            printBookDetails(library, "없는 책"); // 예외 발생
-            printBookDetails(library, books[2].getTitle());
+            library.printBookDetails(books[0].getTitle());
+            library.printBookDetails("없는 책"); // 예외 발생
+            library.printBookDetails(books[2].getTitle());
         } catch (NullPointerException e) {
             System.out.println("NullPointerException: " + e.getMessage());
         }
-    }
-
-    private static void printBookDetails(Library library, String title) {
-        try {
-            Book book = library.findBookByTitle(title);
-            library.printBookInfo(book);
-        } catch (BookNotFoundException e) {
-            System.out.println("BookNotFoundException: " + e.getMessage());
-        }
-
     }
 }

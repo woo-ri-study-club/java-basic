@@ -1,5 +1,7 @@
 package mission2;
 
+import java.util.Optional;
+
 public class Library {
     private Book[] books;
     private int count;
@@ -17,19 +19,29 @@ public class Library {
         }
     }
 
-    public Book findBookByTitle(String title) throws BookNotFoundException {
+    public Optional<Book> findBookByTitle(String title) throws BookNotFoundException {
         for (Book book : books) {
             if (book != null && book.getTitle().equals(title)) {
-                return book;
+                return Optional.of(book);
             }
         }
-        throw new BookNotFoundException("책 '" + title + "'을 찾을 수 없습니다.");
+        return Optional.empty();
     }
 
-    public void printBookInfo(Book book){
-        if (book == null) {
-            throw new NullPointerException("책 정보를 찾을 수 없습니다.");
+    public void printBookInfo(Optional<Book> optionalBook){
+        optionalBook.ifPresentOrElse(
+                System.out::println,
+                () -> System.out.println("책 정보를 찾을 수 없습니다.")
+        );
+    }
+
+    public void printBookDetails(String title) {
+        try {
+            Optional<Book> book = findBookByTitle(title);
+            printBookInfo(book);
+        } catch (BookNotFoundException e) {
+            System.out.println("BookNotFoundException: " + e.getMessage());
         }
-        System.out.println(book);
+
     }
 }

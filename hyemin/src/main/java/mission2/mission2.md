@@ -56,12 +56,12 @@ public class TypeMain {
         System.out.println("메서드 호출 후 array: " + Arrays.toString(array));
     }
 
-    public static void modifyPrimitive(int number) {
+    private static void modifyPrimitive(int number) {
         number = 20;
         System.out.println("modifyPrimitive 내의 number: " + number);
     }
 
-    public static void modifyReference(int[] array) {
+    private static void modifyReference(int[] array) {
         array[0] = 10;
         System.out.println("modifyReference 내의 array: " + Arrays.toString(array));
     }
@@ -117,6 +117,8 @@ public class BookNotFoundException extends Exception {
 ```java
 package mission2;
 
+import java.util.Optional;
+
 public class Library {
     private Book[] books;
     private int count;
@@ -134,20 +136,30 @@ public class Library {
         }
     }
 
-    public Book findBookByTitle(String title) throws BookNotFoundException {
+    public Optional<Book> findBookByTitle(String title) throws BookNotFoundException {
         for (Book book : books) {
             if (book != null && book.getTitle().equals(title)) {
-                return book;
+                return Optional.of(book);
             }
         }
-        throw new BookNotFoundException("책 '" + title + "'을 찾을 수 없습니다.");
+        return Optional.empty();
     }
 
-    public void printBookInfo(Book book){
-        if (book == null) {
-            throw new NullPointerException("책 정보를 찾을 수 없습니다.");
+    public void printBookInfo(Optional<Book> optionalBook){
+        optionalBook.ifPresentOrElse(
+                System.out::println,
+                () -> System.out.println("책 정보를 찾을 수 없습니다.")
+        );
+    }
+
+    public void printBookDetails(String title) {
+        try {
+            Optional<Book> book = findBookByTitle(title);
+            printBookInfo(book);
+        } catch (BookNotFoundException e) {
+            System.out.println("BookNotFoundException: " + e.getMessage());
         }
-        System.out.println(book);
+
     }
 }
 
@@ -170,24 +182,15 @@ public class BookMain {
         }
 
         try {
-            printBookDetails(library, books[0].getTitle());
-            printBookDetails(library, "없는 책"); // 예외 발생
-            printBookDetails(library, books[2].getTitle());
+            library.printBookDetails(books[0].getTitle());
+            library.printBookDetails("없는 책"); // 예외 발생
+            library.printBookDetails(books[2].getTitle());
         } catch (NullPointerException e) {
             System.out.println("NullPointerException: " + e.getMessage());
         }
     }
-
-    private static void printBookDetails(Library library, String title) {
-        try {
-            Book book = library.findBookByTitle(title);
-            library.printBookInfo(book);
-        } catch (BookNotFoundException e) {
-            System.out.println("BookNotFoundException: " + e.getMessage());
-        }
-
-    }
 }
+
 ```
 NullPointerException은 참조형 변수가 null인 상태에서 해당 변수를 통해 메서드 호출이나 속성 접근을 시도할 때 발생한다.
 

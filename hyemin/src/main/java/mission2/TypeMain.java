@@ -15,12 +15,12 @@ public class TypeMain {
         System.out.println("메서드 호출 후 array: " + Arrays.toString(array));
     }
 
-    public static void modifyPrimitive(int number) {
+    private static void modifyPrimitive(int number) {
         number = 20;
         System.out.println("modifyPrimitive 내의 number: " + number);
     }
 
-    public static void modifyReference(int[] array) {
+    private static void modifyReference(int[] array) {
         array[0] = 10;
         System.out.println("modifyReference 내의 array: " + Arrays.toString(array));
     }
