@@ -16,8 +16,12 @@ public class Book {
         return title;
     }
 
+    boolean hasTitle(String title) {
+        return this.getTitle().equalsIgnoreCase(title);
+    }
+
     @Override
     public String toString() {
-        return "제목: "+title+" 저자: "+author+"가격: "+price;
+        return "제목: " + title + " 저자: " + author + "가격: " + price;
     }
 }
