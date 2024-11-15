@@ -6,8 +6,6 @@
  */
 package section3.mission3;
 
-import java.util.List;
-
 public class Mission3 {
 
     public static void main(String[] args) {
@@ -18,17 +16,17 @@ public class Mission3 {
         library.addBook(Book.of("Book2", "윤작가", 20000));
         library.addBook(Book.of("Book3", "최작가", 25000));
         library.addBook(Book.of("book3", "박작가", 30000));
+        library.addBook(Book.of("Book4", "양작가", 35000));
+        library.addBook(Book.of("Book5", "한작가", 40000));
 
         //Library 전체출력
         library.showLibrary();
 
         //book 객체를 null로 두고 접근시도
-        List<Book> findBooks = library.findByTitle("book3");
+        Book[] findBooks = library.findByTitle("book3");
         for (Book findBook : findBooks) {
             findBook = null;
             //System.out.println(findBook.toString()); //toString메서드 사용 시 NullPointerException 발생!
         }
-
-
     }
 }

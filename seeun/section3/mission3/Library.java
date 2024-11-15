@@ -1,15 +1,16 @@
 package section3.mission3;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public class Library {
 
-    private final List<Book> books;
+    private Book[] books;
+    private int currentSize = 0;
+    private int capacity = 5;
 
     private Library() {
-        this.books = new ArrayList<>();
+        this.books = new Book[capacity];
     }
 
     public static Library emptyLibrary() {
@@ -17,22 +18,31 @@ public class Library {
     }
 
     public void addBook(Book book) {
-        books.add(book);
+        if(currentSize >= capacity){
+            capacity *= 2;
+            books = Arrays.copyOf(books, capacity);
+        }
+        books[currentSize++] = book;
     }
 
-    //대소문자 고려하지 않는 경우 나올 수 있는 2개 이상의 결과 고려해 List 리턴
-    public List<Book> findByTitle(String title) {
-        List<Book> result = new ArrayList<>();
+    public Book[] findByTitle(String title) {
+        Book[] findBooks = new Book[currentSize];
+        int count = 0;
+
         for (Book book : books) {
+            if(book == null){
+                break;
+            }
             if (book.isTitle(title)) {
-                result.add(book);
+                findBooks[count++] = book;
             }
         }
 
-        if (result.isEmpty()) {
+        if (count == 0) {
             throw new NoSuchElementException("제목이 " + title + "인 책을 찾을 수 없습니다.");
         }
-        return result;
+
+        return Arrays.copyOf(findBooks, count);
     }
 
     public void showLibrary() {
