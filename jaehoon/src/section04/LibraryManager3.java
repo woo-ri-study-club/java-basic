@@ -4,7 +4,6 @@ public class LibraryManager3 {
 
   public static void main(String[] args) {
     Library library = new Library();
-    System.out.println("도서를 등록합니다.(헤드퍼스트디자인패턴, 객체지향의사실과오해, 오브젝트, 이펙티브자바, 도메인주도개발시작하기)");
     library.addBook("헤드퍼스트디자인패턴", "에릭프리먼", "1111");
     library.addBook("객체지향의사실과오해", "조영호", "2222");
     library.addBook("오브젝트", "조영호", "3333");
