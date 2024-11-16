@@ -38,7 +38,16 @@ public class Book {
         return isCheckedOut;
     }
 
-    // 대출 처리
+
+    public boolean hasSameTitle(String title) {
+        return this.title.equalsIgnoreCase(title);
+    }
+
+     public boolean hasSameIsbn(String isBn) {
+        return this.isBn.equals(isBn);
+    }
+
+
     public void checkout() {
         if (isCheckedOut) {
             throw new IllegalStateException("이미 대출된 도서입니다.");
@@ -46,7 +55,6 @@ public class Book {
         this.isCheckedOut = true;
     }
 
-    // 반납 처리
     public void returnBook() {
         if (!isCheckedOut) {
             throw new IllegalStateException("이미 반납된 도서입니다.");

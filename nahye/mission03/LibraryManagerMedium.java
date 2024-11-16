@@ -8,17 +8,18 @@ public class LibraryManagerMedium {
 
     private List<Book> books = new ArrayList<>(
             Arrays.asList(
-                    new Book("JAVA1","kim","1"),
-                    new Book("JAVA1","kim","2"),
-                    new Book("SPRING1","kim","3")
-                    )
+                    new Book("JAVA1", "kim", "1"),
+                    new Book("JAVA1", "kim", "2"),
+                    new Book("SPRING1", "kim", "3")
+            )
     );
+
     public static void main(String[] args) {
 
         LibraryManagerMedium library = new LibraryManagerMedium();
 
-        library.addBook("SPRING2","kim","4");
-        library.addBook("자료구조","Lee","5");
+        library.addBook("SPRING2", "kim", "4");
+        library.addBook("자료구조", "Lee", "5");
         library.displayAllBooks();
 
         library.searchBookByTitle("SPRING1");
@@ -27,8 +28,8 @@ public class LibraryManagerMedium {
         library.displayAllBooks();
     }
 
-    public void addBook(String title,String author, String isBn) {
-        books.add(new Book(title,author,isBn));
+    public void addBook(String title, String author, String isBn) {
+        books.add(new Book(title, author, isBn));
     }
 
     public void displayAllBooks() {
@@ -39,7 +40,7 @@ public class LibraryManagerMedium {
 
     public void searchBookByTitle(String title) {
         for (Book book : books) {
-            if (book.getTitle().equalsIgnoreCase(title)) {
+            if (book.hasSameTitle(title)) {
                 System.out.println("제목이 " + title + "인 책이 있습니다.");
                 return;
             }
@@ -47,9 +48,9 @@ public class LibraryManagerMedium {
         System.out.println("제목이 " + title + "인 책이 없습니다.");
     }
 
-    public void deleteBookByIsBn(String isBn){
+    public void deleteBookByIsBn(String isBn) {
         for (Book book : books) {
-            if (book.getIsBn().equals(isBn)) {
+            if (book.hasSameIsbn(isBn)) {
                 books.remove(book);
                 System.out.println("책을 삭제합니다.");
                 return;
