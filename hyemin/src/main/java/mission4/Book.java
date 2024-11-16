@@ -16,6 +16,14 @@ public class Book {
         this.publishedYear = publishedYear;
     }
 
+    public String getName(){
+        return name;
+    }
+
+    public boolean matchName(String name) {
+        return this.name.equals(name);
+    }
+
     @Override
     public String toString() {
         return "Book{" +
