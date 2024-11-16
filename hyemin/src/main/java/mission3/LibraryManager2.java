@@ -30,7 +30,7 @@ public class LibraryManager2 {
 
     private static boolean hasBook(List<Book> books, String bookToFind) {
         for (Book book : books) {
-            if (book.getName().equals(bookToFind)) {
+            if (book.matchName(bookToFind)) {
                 return true;
             }
         }
@@ -38,6 +38,6 @@ public class LibraryManager2 {
     }
 
     private static void removeBook(List<Book> books, String isBn) {
-        books.removeIf(book -> book.getIsBn().equals(isBn));
+        books.removeIf(book -> book.matchIsBn(isBn));
     }
 }
