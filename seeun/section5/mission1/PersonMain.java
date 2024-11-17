@@ -10,10 +10,10 @@ public class PersonMain {
     public static void main(String[] args) {
 
         Person person1 = new Person();
-        person1.introducePerson();
+        System.out.println(person1);
 
         Person person2 = new Person("사람", 23);
-        person2.introducePerson();
+        System.out.println(person2);
 
     }
 }
