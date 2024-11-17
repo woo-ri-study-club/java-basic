@@ -5,8 +5,7 @@ public class Person {
     private int age;
 
     public Person() {
-        name = "unknown";
-        age = 0;
+        this("unknown", 0);
     }
 
     public Person(String name, int age) {
