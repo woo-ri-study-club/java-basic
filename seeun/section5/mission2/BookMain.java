@@ -5,13 +5,15 @@ Book 클래스는 책의 제목과 저자, 출판 연도를 나타내는 필드�
  */
 package section5.mission2;
 
+import java.sql.SQLOutput;
+
 public class BookMain {
 
     public static void main(String[] args) {
         Book book1 = new Book("책1", "책1저자");
-        book1.displayBook();
+        System.out.println(book1);
 
         Book book2 = new Book("책2", "책2저자", 2000);
-        book2.displayBook();
+        System.out.println(book2);
     }
 }
