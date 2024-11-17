@@ -20,7 +20,9 @@ public class Library {
     }
 
     public Book getBookByName(String name) {
-        return findBookByName(name).orElseThrow(() -> new IllegalArgumentException("해당 도서를 보유하고 있지 않습니다."));
+        return findBookByName(name).orElseThrow(
+                () -> new LibraryException(ErrorCode.BOOK_NOT_FOUND)
+        );
     }
 
     private void validateBook(Book book) {
@@ -30,19 +32,22 @@ public class Library {
     }
 
     private void requireBookNotNull(Book book) {
-        if(book == null) throw new IllegalArgumentException("유효하지 않은 도서입니다 (Null)");
+        if(book == null)
+            throw new LibraryException(ErrorCode.REQUIRE_NOT_NULL_NOT_EMPTY, "유효하지 않은 도서입니다.");
     }
 
     private void requireFreeSpace(){
         if (count >= books.length) {
-            throw new IndexOutOfBoundsException("추가 가능한 도서 범위를 초과했습니다.");
+            throw new LibraryException(ErrorCode.BOOK_LIMIT_EXCEEDED);
         }
     }
 
     private void requireNotStoredYet(Book book) {
-        findBookByName(book.getName()).ifPresent(
-                foundBook -> {throw new IllegalArgumentException("이미 존재하는 도서입니다.");}
-        );
+        findBookByName(book.getName()).ifPresent(existingBook -> {
+            if (existingBook.equals(book)) {
+                throw new IllegalArgumentException("이미 존재하는 도서입니다.");
+            }
+        });
     }
 
     private Optional<Book> findBookByName(String name) {

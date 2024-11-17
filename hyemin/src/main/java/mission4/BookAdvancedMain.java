@@ -8,12 +8,12 @@ public class BookAdvancedMain {
         Book book2 = new Book("해리포터와 비밀의 방", "JK 롤링", 1998);
         System.out.println(book2);
 
-        Library library = new Library(1);
+        Library library = new Library(2);
 
         try {
             library.addBook(book1);
-            library.getBookByName("해리포터와 비밀의 방");
-            library.addBook(book2);
+            //System.out.println(library.getBookByName("해리포터와 비밀의 방"));
+            library.addBook(book1);
         } catch (RuntimeException e) {
             System.out.println(e.getMessage());
         }
