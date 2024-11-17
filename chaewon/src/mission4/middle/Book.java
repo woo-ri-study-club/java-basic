@@ -8,9 +8,7 @@ public class Book {
     private Year publisherDate;
 
     public Book(String title, String author) {
-        this.title = title;
-        this.author = author;
-        publisherDate = Year.now();
+        this(title, author, 2024);
     }
 
     public Book(String title, String author, int publisherDate) {
