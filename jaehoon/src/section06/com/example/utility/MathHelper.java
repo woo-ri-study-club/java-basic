@@ -1,4 +1,4 @@
-package section06.example.utility;
+package section06.com.example.utility;
 
 public class MathHelper {
 

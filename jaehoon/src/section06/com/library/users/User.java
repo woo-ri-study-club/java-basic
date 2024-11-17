@@ -1,6 +1,7 @@
-package section06.library.users;
+package section06.com.library.users;
 
-import section06.library.books.Book;
+import section06.com.library.books.Book;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class User {
       System.out.println(name + "님은 대출한 책이 없습니다.");
     } else {
       for (Book book : borrowedBooks) {
-        book.print();
+        System.out.println(book);
       }
     }
   }

@@ -1,7 +1,7 @@
-package section06.library;
+package section06.com.library;
 
-import section06.library.books.Book;
-import section06.library.users.User;
+import section06.com.library.books.Book;
+import section06.com.library.users.User;
 
 public class LibraryTest {
 
