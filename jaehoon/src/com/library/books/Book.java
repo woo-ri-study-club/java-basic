@@ -1,4 +1,4 @@
-package section06.library.books;
+package com.library.books;
 
 public class Book {
 
@@ -14,7 +14,7 @@ public class Book {
     this.title = title;
     this.author = author;
     this.isBn = isBn;
-    this.isCheckedOut = false; // NOTE: 기본값은 대출되지 않은 상태 (생략가능)
+    this.isCheckedOut = false; // 기본값은 대출되지 않은 상태
   }
 
   public String getTitle() {
