@@ -7,22 +7,24 @@ Library 클래스에 새 도서를 추가하고, 특정 제목의 도서를 검�
  */
 package section5.mission3;
 
+import java.time.Year;
+
 public class LibraryManager {
 
     public static void main(String[] args) {
 
         Library library1 = new Library();
-        library1.addBook(new Book("책1", "책1저자", 2015));
-        library1.addBook(new Book("책2", "책2저자", 2016));
+        library1.addBook(new Book("책1", "책1저자", Year.of(2015)));
+        library1.addBook(new Book("책2", "책2저자", Year.of(2016)));
 
         library1.showLibrary();
         System.out.println();
 
         Library library2 = new Library(3);
-        library2.addBook(new Book("책3", "책3저자", 2000));
-        library2.addBook(new Book("책4", "책4저자", 2001));
-        library2.addBook(new Book("책5", "책5저자", 2002));
-        library2.addBook(new Book("책6", "책6저자", 2003));
+        library2.addBook(new Book("책3", "책3저자", Year.of(2000)));
+        library2.addBook(new Book("책4", "책4저자", Year.of(2001)));
+        library2.addBook(new Book("책5", "책5저자", Year.of(2002)));
+        library2.addBook(new Book("책6", "책6저자", Year.of(2003)));
 
         library2.showLibrary();
 

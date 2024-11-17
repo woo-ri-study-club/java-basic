@@ -1,19 +1,21 @@
 package section5.mission3;
 
+import java.time.Year;
+
 public class Book {
 
     private String title;
     private String author;
-    private int publishYear;
+    private Year publishYear;
 
-    public Book(String title, String author, int publishYear) {
+    public Book(String title, String author, Year publishYear) {
         this.title = title;
         this.author = author;
         this.publishYear = publishYear;
     }
 
     public boolean isTitle(String title) {
-        return this.title.equals(title);
+        return this.title.equalsIgnoreCase(title);
     }
 
     @Override

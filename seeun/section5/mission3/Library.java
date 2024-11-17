@@ -2,6 +2,7 @@ package section5.mission3;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class Library {
 
@@ -22,9 +23,7 @@ public class Library {
     }
 
     public void addBook(Book book) {
-        if (book == null) {
-            throw new IllegalArgumentException("null인 항목을 추가할 수 없습니다");
-        }
+        Objects.requireNonNull(book, "책은 null일 수 없습니다.");
         checkBooksSize();
         books[currentSize++] = book;
     }
@@ -36,6 +35,9 @@ public class Library {
     }
 
     public Book[] findByTitle(String title) {
+
+        Objects.requireNonNull(title, "제목은 null일 수 없습니다.");
+
         Book[] findBooks = new Book[currentSize];
         int count = 0;
 
