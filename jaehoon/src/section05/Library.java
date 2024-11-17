@@ -6,18 +6,22 @@ import static java.util.Objects.nonNull;
 
 public class Library {
 
-  final int DEFAULT_CAPACITY = 10;
+  private static final int DEFAULT_CAPACITY = 10;
 
   private final Book[] books;
 
   private int bookCount;
 
   public Library() {
-    books = new Book[DEFAULT_CAPACITY];
+    this(DEFAULT_CAPACITY);
   }
 
-  public Library(int booksCapacity) {
-    books = new Book[booksCapacity];
+  public Library(int initialCapacity) {
+    if (initialCapacity <= 0) {
+      throw new IllegalArgumentException("라이브러리의 용량은 0보다 커야 합니다.");
+    }
+    this.books = new Book[initialCapacity];
+    this.bookCount = 0;
   }
 
   public boolean addBook(String title, String author, int publicationYear) throws IllegalStateException {
