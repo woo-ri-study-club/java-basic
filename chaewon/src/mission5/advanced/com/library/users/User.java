@@ -42,8 +42,6 @@ public class User {
             return "대여 중인 도서가 없습니다.";
         }
 
-        StringBuilder sb = new StringBuilder();
-
         return borrowBooks.stream()
                 .map(Book::toString)
                 .collect(Collectors.joining("\n"));
