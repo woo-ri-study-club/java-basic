@@ -3,7 +3,7 @@ package mission5.com.library.books;
 public class Book {
     private String name;
     private String author;
-    private String isBn;
+    private String isbn;
 
     public Book(String name, String author, String isBn) {
         validateInput(name, "제목");
@@ -12,7 +12,7 @@ public class Book {
 
         this.name = name;
         this.author = author;
-        this.isBn = isBn;
+        this.isbn = isBn;
     }
 
     @Override
@@ -20,7 +20,7 @@ public class Book {
         return "Book{" +
                 "name='" + name + '\'' +
                 ", author='" + author + '\'' +
-                ", isBn='" + isBn + '\'' +
+                ", isbn='" + isbn + '\'' +
                 '}';
     }
 

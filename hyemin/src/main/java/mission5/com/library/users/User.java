@@ -30,11 +30,11 @@ public class User {
     public void printBorrowedBooks() {
         if (loanedBooks.isEmpty()) {
             System.out.println(name + "님은 현재 빌린 책이 없습니다.");
-        } else {
-            System.out.println(name + "님의 대여 목록:");
-            for (Book book : loanedBooks) {
-                System.out.println(book);
-            }
+            return;
+        }
+        System.out.println(name + "님의 대여 목록:");
+        for (Book book : loanedBooks) {
+            System.out.println(book);
         }
     }
 
