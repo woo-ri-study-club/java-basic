@@ -21,6 +21,7 @@ public class Book {
     public boolean hasSameTitle(String title){
         return this.title.equalsIgnoreCase(title);
     }
+
     @Override
     public String toString() {
         return "Book{" +
@@ -31,8 +32,6 @@ public class Book {
     }
 
     public static Optional<Book> findBookByTitle(String title, Book[] books) {
-        if(books == null)
-            return Optional.empty();
         return Arrays.stream(books)
                 .filter(book -> book != null && book.hasSameTitle(title))
                 .findFirst();

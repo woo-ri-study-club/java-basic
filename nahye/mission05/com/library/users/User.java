@@ -4,6 +4,7 @@ import mission05.com.library.books.Book;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class User {
 
@@ -18,7 +19,7 @@ public class User {
     }
 
     public boolean borrowBook(String title, Book[] books) {
-        if (count >= books.length) {
+        if (count >= MAX_BOOKS) {
             throw new IllegalArgumentException("더 이상 책을 빌릴 수 없습니다.");
         }
 
@@ -31,13 +32,10 @@ public class User {
 
     public void returnBook(String title) {
 
-        int index = -1;
-        for (int i = 0; i < count; i++) {
-            if (borrowedBooks[i].hasSameTitle(title)) {
-                index = i;
-                break;
-            }
-        }
+        int index = IntStream.range(0,count)
+                .filter(i -> borrowedBooks[i].hasSameTitle(title))
+                .findFirst()
+                .orElse(-1);
 
         if(index == -1){
             throw new IllegalArgumentException("반납할 책이 없습니다.");
@@ -58,7 +56,7 @@ public class User {
     public String toString() {
         return name+"님이 빌리신 책은 "
                 + Arrays.stream(borrowedBooks)
-                .map(book -> book.getTitle())
+                .map(Book::getTitle)
                 .limit(count)
                 .collect(Collectors.joining(", "))
                 + " 입니다.";
