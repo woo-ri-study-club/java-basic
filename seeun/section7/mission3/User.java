@@ -16,7 +16,7 @@ public class User {
     }
 
     protected boolean verifyPassword(String inputPassword) {
-        Objects.requireNonNull(inputPassword, "비밀번호는 null일 수 없습니다.");
+        Objects.requireNonNull(inputPassword, "잘못된 비밀번호 입력입니다.");
         if(password.equals(inputPassword)){
             return true;
         }
