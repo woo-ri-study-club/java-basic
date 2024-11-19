@@ -1,9 +1,5 @@
 package section7.mission3;
 
-import java.util.Objects;
-
-import static java.util.Objects.isNull;
-
 public class Account {
     private User user;
     private int accountNumber;
@@ -15,14 +11,6 @@ public class Account {
         this.balance = balance;
     }
 
-    protected void userErrorMessage() {
-        System.out.println("회원 처리 중 에러가 발생했습니다.");
-    }
-
-    protected void accountErrorMessage() {
-        System.out.println("계좌 처리 중 에러가 발생했습니다.");
-    }
-
     public void login(String inputPassword) {
         if (user.verifyPassword(inputPassword)) {
             System.out.println("로그인에 성공했습니다.");
@@ -32,24 +20,26 @@ public class Account {
     }
 
     public void deposit(int amount) {
-        balance += amount;
+        if(validateAmount(amount)){
+            balance += amount;
+        }
     }
 
     public void withdraw(int amount) {
-        if (validateAmount(amount) && verifyBalance(amount)) {
+        if (validateAmount(amount) && hasEnoughBalance(amount)) {
             System.out.println("출금되었습니다.");
         }
     }
 
     private boolean validateAmount(int amount){
         if (amount <= 0) {
-            printError("잘못된 출금액 입력입니다. 0 이상의 금액만 출금가능합니다.");
+            printError("입출금은 0 이상의 금액만 가능합니다.");
             return false;
         }
         return true;
     }
 
-    private boolean verifyBalance(int amount) {
+    private boolean hasEnoughBalance(int amount) {
         if(balance - amount >= 0){
             balance -= amount;
             return true;
@@ -61,6 +51,14 @@ public class Account {
     private void printError(String errorMessage) {
         accountErrorMessage();
         System.out.println(errorMessage);
+    }
+
+    protected void userErrorMessage() {
+        System.out.println("회원 처리 중 에러가 발생했습니다.");
+    }
+
+    protected void accountErrorMessage() {
+        System.out.println("계좌 처리 중 에러가 발생했습니다.");
     }
 
     @Override

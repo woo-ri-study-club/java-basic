@@ -17,10 +17,7 @@ public class User {
 
     protected boolean verifyPassword(String inputPassword) {
         Objects.requireNonNull(inputPassword, "잘못된 비밀번호 입력입니다.");
-        if(password.equals(inputPassword)){
-            return true;
-        }
-        return false;
+        return password.equals(inputPassword);
     }
 
     public boolean changePassword(String currentPassword, String newPassword) {
