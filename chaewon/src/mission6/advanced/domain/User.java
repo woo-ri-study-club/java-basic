@@ -10,10 +10,14 @@ public class User {
     }
 
     public void updatePassword(String password){
-        validateBlankPassword(password);
-        validateSamePassword(password);
+        validatePassword(password);
 
         this.password = password;
+    }
+
+    private void validatePassword(String password) {
+        validateBlankPassword(password);
+        validateSamePassword(password);
     }
 
     private void validateBlankPassword(String password) {

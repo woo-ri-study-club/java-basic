@@ -5,15 +5,9 @@ import mission6.advanced.domain.User;
 
 public class AdvancedMain {
     public static void main(String[] args) {
-        User user = new User(
-                "Darimi"
-                , "password1234"
-        );
+        User user = new User("Darimi", "password1234");
 
-        Account userAccount = new Account(
-                user
-                , "darimi2222"
-        );
+        Account userAccount = new Account(user, "darimi2222");
 
         System.out.println(userAccount.displayAccount());
 
