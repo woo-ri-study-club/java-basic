@@ -21,7 +21,7 @@ public class User {
   }
 
   public void checkCurrentPassword(String currentPassword) {
-    if (!this.password.equalsIgnoreCase(currentPassword)) {
+    if (!this.password.equals(currentPassword)) {
       throw new IllegalArgumentException("현재 비밀번호가 일치하지 않습니다.");
     }
   }
