@@ -2,7 +2,7 @@ package mission06.advanced;
 
 public class Account {
     private User user;
-    private final int ACCOUNT_NUMBER;
+    private int accountNumber;
     private int balance;
 
     public Account(User user, int accountNumber, int balance) {
@@ -10,7 +10,7 @@ public class Account {
             throw new IllegalArgumentException("잔액은 0 이상이어야 합니다.");
         }
         this.user = user;
-        this.ACCOUNT_NUMBER = accountNumber;
+        this.accountNumber = accountNumber;
         this.balance = balance;
     }
 
@@ -23,14 +23,8 @@ public class Account {
         return false;
     }
 
-    public String getAccountInfo(String userId) {
-        if (userId == null || userId.isEmpty()) {
-            return "유효하지 않은 사용자 ID입니다.";
-        }
-        if(user.getUserId().equals(userId)) {
-            return "계좌번호: " + this.ACCOUNT_NUMBER + ", 사용자 이름: " + user.getName()+", 잔액: " + this.balance + "원";
-        }
-        return "계좌 정보를 확인할 수 없습니다.";
+    public String getAccountInfo() {
+        return "계좌번호: " + this.accountNumber + ", 사용자 이름: " + user.getName()+", 잔액: " + this.balance + "원";
     }
 
     public void deposit(int amount) {

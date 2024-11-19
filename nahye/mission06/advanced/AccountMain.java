@@ -5,7 +5,7 @@ public class AccountMain {
         User user = new User("user1", "1111","KIM", "kim@aaa.com");
         Account account = new Account(user, 12345678, 5000);
 
-        String accountInfo = account.getAccountInfo("user1");
+        String accountInfo = account.getAccountInfo();
         System.out.println(accountInfo);
         account.changePassword("1111","2222");
     }
