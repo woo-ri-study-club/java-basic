@@ -1,6 +1,5 @@
 package mission6;
 
-// User 클래스
 public class User {
     private String username;
     private String password;

@@ -17,14 +17,14 @@ public class Account {
     }
 
     public void deposit(int amount) {
-        if (!isAmountValid(amount)) {
+        if (isAmountInValid(amount)) {
             throw new IllegalArgumentException("유효하지 않은 금액입니다.");
         }
         balance += amount;
     }
 
     public void withdraw(int amount) {
-        if (!isAmountValid(amount) || balance - amount < 0) {
+        if (isAmountInValid(amount) || balance - amount < 0) {
             throw new IllegalArgumentException("유효하지 않은 금액이거나 잔액이 부족합니다.");
         }
         balance -= amount;
@@ -34,7 +34,7 @@ public class Account {
         return balance;
     }
 
-    private boolean isAmountValid(int amount) {
+    private boolean isAmountInValid(int amount) {
         return amount > 0;
     }
 }
