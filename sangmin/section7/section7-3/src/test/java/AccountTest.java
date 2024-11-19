@@ -15,12 +15,12 @@ class AccountTest {
         Account account = new Account(user, 1000);
 
         // when
-        Account depositedAccount = account.deposit(1000);
+        account.deposit(1000);
 
         // then
         assertSoftly(softly -> {
-            softly.assertThat(depositedAccount.getUserName()).isEqualTo("name");
-            softly.assertThat(depositedAccount.getBalance()).isEqualTo(2000);
+            softly.assertThat(account.getUserName()).isEqualTo("name");
+            softly.assertThat(account.getBalance()).isEqualTo(2000);
         });
     }
 
@@ -45,12 +45,12 @@ class AccountTest {
         Account account = new Account(user, 1000);
 
         // when
-        Account withdrawedAccount = account.withdraw(1000, "password");
+        account.withdraw(1000, "password");
 
         // then
         assertSoftly(softly -> {
-            softly.assertThat(withdrawedAccount.getUserName()).isEqualTo("name");
-            softly.assertThat(withdrawedAccount.getBalance()).isEqualTo(0);
+            softly.assertThat(account.getUserName()).isEqualTo("name");
+            softly.assertThat(account.getBalance()).isEqualTo(0);
         });
     }
 
