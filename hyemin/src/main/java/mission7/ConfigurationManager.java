@@ -3,6 +3,7 @@ package mission7;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class ConfigurationManager {
 
@@ -22,27 +23,25 @@ public class ConfigurationManager {
     }
 
     public void setConfig(String key, String value) {
-        validateString(key);
-        validateString(value);
+        validateStrings(key, value);
         config.put(key, value);
     }
 
     public String getConfig(String key) {
-        validateString(key);
+        validateStrings(key);
         return getValueOrThrow(key);
     }
 
-    private void validateString(String string) {
-        if (string == null || string.isBlank()) {
-            throw new IllegalArgumentException("유효하지 않은 값입니다");
+    private void validateStrings(String... strings) {
+        for (String str : strings) {
+            if (str == null || str.isEmpty()) {
+                throw new IllegalArgumentException("Strings cannot be null or empty");
+            }
         }
     }
 
     private String getValueOrThrow(String key) {
-        String value = config.get(key);
-        if (value == null) {
-            throw new NoSuchElementException("key에 해당하는 value가 없습니다: " + key);
-        }
-        return value;
+        return Optional.ofNullable(config.get(key))
+                .orElseThrow(() -> new NoSuchElementException("key에 해당하는 value가 없습니다: " + key));
     }
 }
