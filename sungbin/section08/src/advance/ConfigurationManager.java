@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ConfigurationManager {
 
-    private static ConfigurationManager INSTANCE;
+    private static ConfigurationManager instance;
 
     private Map<String, String> config = new HashMap<>();
 
@@ -13,11 +13,11 @@ public class ConfigurationManager {
     }
 
     public static ConfigurationManager getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new ConfigurationManager();
+        if (instance == null) {
+            instance = new ConfigurationManager();
         }
 
-        return INSTANCE;
+        return instance;
     }
 
     public String getConfig(String key) {
