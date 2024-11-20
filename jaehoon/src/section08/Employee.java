@@ -2,25 +2,19 @@ package section08;
 
 public class Employee {
 
-  private static int totalEmployees;
-  private String name;
   private int id;
+  private String name;
 
-  public Employee(String name, int id) {
-    this.name = name;
+  public Employee(int id, String name) {
     this.id = id;
-    totalEmployees++;
-  }
-
-  public static int getTotalEmployees() {
-    return totalEmployees;
+    this.name = name;
   }
 
   @Override
   public String toString() {
-    return "Employee{" +
-        "name='" + name + '\'' +
-        ", id=" + id +
+    return "직원{" +
+        "ID='" + id + '\'' +
+        ", 이름=" + name +
         '}';
   }
 }
