@@ -23,10 +23,14 @@ public class ConfigurationManager {
     }
 
     public String getConfig(String key) {
-        if (!configurations.containsKey(key)){
+        if (keyDoesNotExist(key)){
             throw new IllegalArgumentException("해당 key 값이 존재하지 않습니다.");
         }
 
         return configurations.get(key);
+    }
+
+    private boolean keyDoesNotExist(String key) {
+        return !configurations.containsKey(key);
     }
 }
