@@ -27,7 +27,7 @@ public class Library {
     }
 
     private void checkSize() {
-        if (books.size() + 1 >= MAX_BOOKS) {
+        if (books.size() >= MAX_BOOKS) {
             throw new IllegalStateException("더 이상 책을 추가할 수 없습니다.");
         }
     }
