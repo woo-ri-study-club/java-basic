@@ -6,7 +6,7 @@ public class Library {
     private int count;
 
     public void addBook(Book book) {
-        if (count > MAX_BOOKS) {
+        if (count >= MAX_BOOKS) {
             System.out.println("책을 더이상 추가할 수 없습니다.");
             return;
         }
