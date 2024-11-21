@@ -7,7 +7,7 @@ package seuem.mission8.beginner;
  */
 public class Circle {
     static final double PI= 3.14159;
-    final double radius;
+    double radius;
 
     public Circle(double radius) {
         this.radius = radius;
