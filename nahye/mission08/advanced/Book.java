@@ -11,6 +11,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "책 이름: " + title + ", 저자: " + author;
+        return title + " by " + author;
     }
 }
