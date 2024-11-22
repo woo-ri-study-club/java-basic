@@ -9,6 +9,6 @@ public class Main {
         System.out.println(person.getName());
 
         // final로 선언된 person는 재할당이 불가능하다.
-        person = new Person("name");
+//        person = new Person("name");
     }
 }
