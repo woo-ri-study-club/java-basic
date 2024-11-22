@@ -1,6 +1,6 @@
 package seuem.mission11.advanced;
 
-public class Rectangle extends Shape{
+public class Rectangle extends Shape {
 
     private double width;
     private double height;

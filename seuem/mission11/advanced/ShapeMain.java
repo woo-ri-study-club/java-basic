@@ -9,7 +9,7 @@ public class ShapeMain {
         System.out.println();
 
         Circle circle = new Circle(200);
-        System.out.println("circle.calculateArea 메서드 = "+ circle.calculateArea());
+        System.out.println("circle.calculateArea 메서드 = " + circle.calculateArea());
         circle.displayArea();
     }
 }

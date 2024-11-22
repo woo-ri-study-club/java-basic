@@ -1,6 +1,6 @@
 package seuem.mission11.advanced;
 
-public class Circle extends Shape{
+public class Circle extends Shape {
     private double radius;
 
     public Circle(double radius) {
@@ -9,6 +9,6 @@ public class Circle extends Shape{
 
     @Override
     protected double calculateArea() {
-        return Math.PI*radius;
+        return Math.PI * Math.pow(radius, 2);
     }
 }
