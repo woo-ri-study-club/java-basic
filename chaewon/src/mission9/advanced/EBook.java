@@ -12,7 +12,7 @@ public class EBook extends Book {
 
     @Override
     public void displayDetails() {
-        System.out.println("Title: " + title + ", Author: " + author + ", Price: " + price + ", " +
-                "File Size: " + fileSize + ", Format: " + format);
+        super.displayDetails();
+        System.out.println("File Size: " + fileSize + ", Format: " + format);
     }
 }
