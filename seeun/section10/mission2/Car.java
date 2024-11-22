@@ -9,6 +9,6 @@ public class Car extends Vehicle{
     }
 
     public void showDetails() {
-        System.out.println("Brand: " + brand + ", Max Speed: " + super.getMaxSpeed());
+        System.out.println("Brand: " + brand + ", Max Speed: " + getMaxSpeed());
     }
 }

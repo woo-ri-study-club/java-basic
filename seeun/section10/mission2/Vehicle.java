@@ -7,7 +7,7 @@ public class Vehicle {
         this.maxSpeed = maxSpeed;
     }
 
-    public int getMaxSpeed() {
+    protected int getMaxSpeed() {
         return maxSpeed;
     }
 }
