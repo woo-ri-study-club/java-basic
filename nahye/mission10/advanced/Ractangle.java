@@ -13,10 +13,4 @@ public class Ractangle extends Shape {
     public double calculateArea() {
         return width * height;
     }
-
-    @Override
-    public void display() {
-        super.display();
-        System.out.println(calculateArea() +" 입니다.");
-    }
 }

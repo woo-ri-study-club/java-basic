@@ -13,9 +13,4 @@ public class Circle extends Shape{
         return radius * radius * Math.PI;
     }
 
-    @Override
-    public void display() {
-        super.display();
-        System.out.println(calculateArea() +" 입니다.");
-    }
 }
