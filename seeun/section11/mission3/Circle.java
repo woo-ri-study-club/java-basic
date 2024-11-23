@@ -12,11 +12,4 @@ public class Circle extends Shape{
     double calculateArea() {
         return Math.PI * radius * radius;
     }
-
-    @Override
-    void displayArea() {
-        System.out.println("원의 면적: " + calculateArea());
-    }
-
-
 }

@@ -3,11 +3,7 @@ package section11.mission2;
 public class AnimalMain {
 
     public static void main(String[] args) {
-        Animal[] animals = new Animal[3];
-
-        animals[0] = new Animal();
-        animals[1] = new Dog();
-        animals[2] = new Cat();
+        Animal[] animals = {new Animal(), new Dog(), new Cat()};
 
         for (Animal animal : animals) {
             if(animal instanceof Dog){
