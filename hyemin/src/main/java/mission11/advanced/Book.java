@@ -1,4 +1,4 @@
-package mission11;
+package mission11.advanced;
 
 public interface Book {
     String getTitle();

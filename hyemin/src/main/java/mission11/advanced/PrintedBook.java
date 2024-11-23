@@ -1,6 +1,8 @@
-package mission11;
+package mission11.advanced;
 
-public class PrintedBook extends AbstractBook{
+import mission11.advanced.AbstractBook;
+
+public class PrintedBook extends AbstractBook {
 
     private String publisher;
 

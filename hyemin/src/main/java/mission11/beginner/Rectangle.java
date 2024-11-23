@@ -1,4 +1,4 @@
-package mission11;
+package mission11.beginner;
 
 public class Rectangle extends Shape {
 
