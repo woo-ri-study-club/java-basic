@@ -1,27 +1,12 @@
 package section12.advenced;
 
-public class PrintedBook implements Book {
-
-  private final String title;
-
-  private final String author;
+public class PrintedBook extends AbstractBook {
 
   private final String publisher;
 
   public PrintedBook(String title, String author, String publisher) {
-    this.title = title;
-    this.author = author;
+    super(title, author);
     this.publisher = publisher;
-  }
-
-  @Override
-  public String getTitle() {
-    return title;
-  }
-
-  @Override
-  public String getAuthor() {
-    return author;
   }
 
   public String getPublisher() {
@@ -31,8 +16,8 @@ public class PrintedBook implements Book {
   @Override
   public String toString() {
     return "PrintBook{" +
-        "제목='" + title + '\'' +
-        ", 저자='" + author + '\'' +
+        "제목='" + super.getTitle() + '\'' +
+        ", 저자='" + super.getAuthor() + '\'' +
         ", 출판사='" + publisher + '\'' +
         '}';
   }
