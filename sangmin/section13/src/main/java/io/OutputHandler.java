@@ -12,6 +12,18 @@ public class OutputHandler {
         System.out.print("선택: ");
     }
 
+    public static void printLoginMenu() {
+        System.out.println("=== 로그인 ===");
+    }
+
+    public static void printLoginId() {
+        System.out.print("아이디: ");
+    }
+
+    public static void printLoginPassword() {
+        System.out.print("비밀번호: ");
+    }
+
     public static void printMemberMenu() {
         System.out.println("=== 회원 메뉴 ===");
         System.out.println("1. 책 조회");
@@ -49,5 +61,9 @@ public class OutputHandler {
 
     public static void printSignSuccess(String name) {
         System.out.println(name + "님 회원가입을 축하합니다.");
+    }
+
+    public static void printLoginSuccess(String name) {
+        System.out.println(name + "님 환영합니다.");
     }
 }

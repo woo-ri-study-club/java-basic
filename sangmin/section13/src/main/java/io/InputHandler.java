@@ -8,7 +8,15 @@ public class InputHandler {
     private InputHandler() {
     }
 
-    public static String getMainMenuSelected() {
+    public static String getMenuSelected() {
+        return scanner.nextLine();
+    }
+
+    public static String getLoginId() {
+        return scanner.nextLine();
+    }
+
+    public static String getLoginPassword() {
         return scanner.nextLine();
     }
 

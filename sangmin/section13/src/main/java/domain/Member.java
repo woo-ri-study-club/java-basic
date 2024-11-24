@@ -17,7 +17,19 @@ public class Member {
         return new Member(signUpName, signUpId, signUpPassword, memberType);
     }
 
+    public boolean isMatchIdAndPassword(String id, String password) {
+        return this.id.equals(id) && this.password.equals(password);
+    }
+
     public String getName() {
         return name;
+    }
+
+    public boolean isMember() {
+        return memberType == MemberType.MEMBER;
+    }
+
+    public boolean isAdmin() {
+        return memberType == MemberType.ADMIN;
     }
 }
