@@ -1,6 +1,8 @@
 package me.sungbin.book;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
 
     private final String title;
 
@@ -9,6 +11,8 @@ public class Book {
     private final String isbn;
 
     private boolean isLoaned;
+
+    private static final long serialVersionUID = 1L;
 
     public Book(String title, String author, String isbn) {
         this.title = title;

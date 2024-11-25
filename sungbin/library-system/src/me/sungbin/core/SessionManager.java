@@ -13,6 +13,10 @@ public class SessionManager {
         return loginUser != null;
     }
 
+    public boolean isNotLogin() {
+        return !isLogin();
+    }
+
     public boolean isAdmin() {
         return loginUser != null && loginUser.isAdmin();
     }
@@ -22,10 +26,10 @@ public class SessionManager {
     }
 
     public void login(Scanner scanner, UserManager userManager) {
-        System.out.println("ID: ");
+        System.out.print("ID: ");
         String id = scanner.nextLine();
 
-        System.out.println("비밀번호: ");
+        System.out.print("비밀번호: ");
         String password = scanner.nextLine();
 
         User user = userManager.findUserBy(id);

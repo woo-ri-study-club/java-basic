@@ -2,10 +2,11 @@ package me.sungbin.user;
 
 import me.sungbin.book.Book;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class User {
+public abstract class User implements Serializable {
 
     private final String id;
 
@@ -15,6 +16,8 @@ public abstract class User {
 
     private final List<Book> loanedBooks = new ArrayList<>();
 
+    private static final long serialVersionUID = 1L;
+
     public User(String id, String name, String password) {
         this.id = id;
         this.name = name;
@@ -23,10 +26,6 @@ public abstract class User {
 
     public String getId() {
         return id;
-    }
-
-    public boolean checkPassword(String password) {
-        return this.password.equals(password);
     }
 
     public boolean notValidPassword(String password) {

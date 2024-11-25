@@ -1,5 +1,6 @@
 package me.sungbin.user;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -35,7 +36,7 @@ public class UserManager {
     }
 
     public Map<String, User> getUsers() {
-        return users;
+        return Collections.unmodifiableMap(users);
     }
 
     private boolean validateRegisterUser(String id) {
