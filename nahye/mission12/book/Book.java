@@ -1,40 +1,42 @@
 package mission12.book;
 
+import mission12.user.User;
+
 public class Book {
     private String title;
     private String author;
 
     private String isbn;
 
-    private boolean isBorrowed;
-    private String borrowedId;
+    private User user;
 
     public Book(String title, String author, String isbn) {
         this.title = title;
         this.author = author;
         this.isbn = isbn;
-        this.isBorrowed = false;
-        this.borrowedId = "";
+        this.user = null;
     }
 
     public boolean hasSameTitle(String title) {
         return this.title.equals(title);
     }
 
-    public void borrow() {
-        this.isBorrowed = true;
+    public void borrow(User user) {
+        this.user = user;
     }
 
     public boolean isNotBorrowed() {
-        return !isBorrowed;
+        if (this.user == null) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isBorrowed() {
-        return this.isBorrowed;
-    }
-
-    public void enrollBorrowedId(String id) {
-        this.borrowedId = id;
+        if (this.user != null) {
+            return true;
+        }
+        return false;
     }
 
 
@@ -44,15 +46,29 @@ public class Book {
     }
 
     public void isReturn() {
-        this.isBorrowed = false;
-        this.borrowedId = "";
+        this.user = null;
     }
 
-    public boolean isBorrowedBy(String id) {
-        return this.borrowedId.equals(id);
+    public boolean isBorrowedBy(User user) {
+        if (this.user == user) {
+            return true;
+        }
+        return false;
     }
 
     public boolean hasSameIsbn(String isbn) {
         return this.isbn.equals(isbn);
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getAuthor() {
+        return author;
     }
 }

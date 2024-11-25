@@ -20,58 +20,48 @@ public class LibraryService {
         books.add(new Book("book3", "kim", "3333"));
     }
 
-    public void addBook(String title, String author, String isbn) {
+    public void addBook(Book book) {
+        if (checkAlreadyHasSameIsbn(book.getIsbn()))
+            return;
+        if (checkNullValues(book.getTitle(), book.getAuthor(), book.getIsbn()))
+            return;
 
-        if (checkAlreadyHasSameIsbn(isbn)) return;
-        if (checkNullValues(title, author, isbn)) return;
-
-        Book bookToAdd = new Book(title, author, isbn);
-
-        books.add(bookToAdd);
+        books.add(book);
         System.out.println("책이 등록되었습니다.");
     }
 
-    public void borrowBookByTitle(StandardUser user, String titleToBorrow) {
-        boolean bookFound = false;
-        for (Book book : books) {
-            if (book.hasSameTitle(titleToBorrow)) {
-                bookFound = true;
-                if (book.isNotBorrowed()) {
-                    book.borrow();
-                    book.enrollBorrowedId(user.getId());
-                    user.enrollBorrowedBook(book);
-                    System.out.println("책이 대출 되었습니다.");
-                    break;
-                } else {
-                    System.out.println("이미 대출된 책입니다.");
-                }
-            }
-        }
-        if (!bookFound) {
+    public void borrowBookByTitle(StandardUser user, String title) {
+        Book bookFound = findByTitle(title);
+        if (bookFound == null) {
             System.out.println("찾으시는 도서가 없습니다.");
+            return;
         }
+
+        if (bookFound.isBorrowed()) {
+            System.out.println("이미 대출된 책입니다.");
+            return;
+        }
+        bookFound.borrow(user);
+        user.enrollBorrowedBook(bookFound);
+        System.out.println("책이 대출 되었습니다.");
     }
 
-    public void returnBookByTitle(StandardUser user, String titleToReturn) {
-        boolean bookReturned = false;
-        for (Book book : books) {
-            if (book.hasSameTitle(titleToReturn) && book.isBorrowed()) {
-                bookReturned = true;
-                book.isReturn();
-                user.removeBorrowedBook(book);
-                System.out.println("책이 반납 되었습니다.");
-                break;
-            }
-        }
-        if (!bookReturned) {
+    public void returnBookByTitle(StandardUser user, String title) {
+        Book bookFound = findByTitle(title);
+        if (bookFound == null) {
             System.out.println("반납할 책이 아닙니다.");
+            return;
         }
+
+        bookFound.isReturn();
+        user.removeBorrowedBook(bookFound);
+        System.out.println("책이 반납 되었습니다.");
     }
 
     public void showBorrowedBookBy(StandardUser user) {
         boolean bookBorrowed = false;
         for (Book book : books) {
-            if (book.isBorrowedBy(user.getId())) {
+            if (book.isBorrowedBy(user)) {
                 bookBorrowed = true;
                 System.out.println(book);
             }
@@ -81,19 +71,25 @@ public class LibraryService {
         }
     }
 
+    public Book findByTitle(String title) {
+        for (Book book : books) {
+            if (book.hasSameTitle(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     public void displayAllBooks() {
         for (Book book : books) {
             System.out.println(book);
         }
     }
 
-    public List<Book> getBooks() {
-        return books;
-    }
 
     public boolean checkAlreadyHasSameIsbn(String isbn) {
         for (Book book : books) {
-            if(book.hasSameIsbn(isbn)){
+            if (book.hasSameIsbn(isbn)) {
                 System.out.println("등록에 실패했습니다. 같은 isbn의 책이 있습니다.");
                 return true;
             }
@@ -102,7 +98,7 @@ public class LibraryService {
     }
 
     public boolean checkNullValues(String title, String author, String isbn) {
-        if(title.trim().isEmpty() || author.trim().isEmpty() || isbn.trim().isEmpty()){
+        if (title.trim().isEmpty() || author.trim().isEmpty() || isbn.trim().isEmpty()) {
             System.out.println("모두 입력해주세요");
             return true;
         }

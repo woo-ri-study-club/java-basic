@@ -1,5 +1,6 @@
 package mission12.view;
 
+import mission12.book.Book;
 import mission12.service.LibraryService;
 import mission12.service.UserService;
 import mission12.user.AdminUser;
@@ -7,9 +8,9 @@ import mission12.user.StandardUser;
 
 import java.util.Scanner;
 
-public class MenuView{
+public class MenuView {
 
-    private final static Scanner input = new Scanner(System.in);
+    private final Scanner input = new Scanner(System.in);
     private final LibraryService libraryService;
     private final UserService userService;
 
@@ -143,7 +144,7 @@ public class MenuView{
         System.out.println("ISBN: ");
         String isbn = input.nextLine();
 
-        libraryService.addBook(title, author, isbn);
+        libraryService.addBook(new Book(title, author, isbn));
     }
 
     public void processLogIn() {
@@ -165,7 +166,7 @@ public class MenuView{
         System.out.print("Name : ");
         String inputName = input.nextLine();
 
-        userService.registerUser(inputId, inputPassword, inputName);
+        userService.registerUser(new StandardUser(inputId, inputName, inputPassword));
     }
 
 }

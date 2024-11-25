@@ -15,38 +15,39 @@ public class UserService {
         users.add(new AdminUser("admin", "admin", "admin"));
     }
 
-    public void registerUser(String id, String password, String name) {
-        if (checkAlreadyHasSameId(id)) return;
-        User user = new StandardUser(id, password, name);
+    public void registerUser(User user) {
+        if (checkAlreadyHasSameId(user.getId())) return;
         users.add(user);
         System.out.println("회원가입이 완료되었습니다.");
     }
 
-    public List<User> getUsers() {
-        return users;
+    public void logIn(String id, String password, MenuView view) {
+        User user = getUserById(id);
+        if (user == null) {
+            System.out.println("일치하는 id가 없습니다.");
+            return;
+        }
+
+        if (!user.checkPassword(password)) {
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            return;
+        }
+
+        System.out.println("로그인에 성공했습니다.");
+        showViewAfterLogin(view, user);
     }
 
-    public void logIn(String id, String password, MenuView view) {
-        boolean foundId = false;
-        for (User checkUser : users) {
-            if (checkUser.getId().equals(id)) {
-                foundId = true;
-                if (checkUser.checkPassword(password)) {
-                    System.out.println("로그인에 성공했습니다.");
-                    if (checkUser instanceof AdminUser) {
-                        view.showWhenAdminLogin((AdminUser) checkUser);
-                    } else if (checkUser instanceof StandardUser) {
-                        view.showWhenUserLogin((StandardUser) checkUser);
-                    }
-                } else {
-                    System.out.println("비밀번호가 일치하지 않습니다.");
-                }
-                break;
+    private User getUserById(String id) {
+        for (User user : users) {
+            if (user.hasUserById(id)) {
+                return user;
             }
         }
-        if (!foundId) {
-            System.out.println("일치하는 id가 없습니다.");
-        }
+        return null;
+    }
+
+    public void showViewAfterLogin(MenuView view, User user) {
+        user.showMenuView(view);
     }
 
     public void showUserBorrowed() {
@@ -59,9 +60,8 @@ public class UserService {
     }
 
     private boolean checkAlreadyHasSameId(String id) {
-        for(User user : users) {
-            if(user.getId().equals(id)) {
-                System.out.println("회원가입에 실패했습니다. 같은 ID가 이미 존재합니다.");
+        for (User user : users) {
+            if (user.hasUserById(id)) {
                 return true;
             }
         }

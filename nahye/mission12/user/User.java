@@ -1,5 +1,7 @@
 package mission12.user;
 
+import mission12.view.MenuView;
+
 public interface User {
     public String name = "";
     public String id = "";
@@ -14,4 +16,7 @@ public interface User {
 
 
     public boolean checkPassword(String password);
+
+    void showMenuView(MenuView view);
+
 }
