@@ -5,7 +5,6 @@ import mission12.user.User;
 public class Book {
     private String title;
     private String author;
-
     private String isbn;
 
     private User user;
@@ -25,12 +24,6 @@ public class Book {
         this.user = user;
     }
 
-    public boolean isNotBorrowed() {
-        if (this.user == null) {
-            return true;
-        }
-        return false;
-    }
 
     public boolean isBorrowed() {
         if (this.user != null) {
@@ -42,7 +35,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "제목: " + title + ", 저자: " + author + ", ISBN: " + isbn;
+        return "제목: " + title + ", 저자: " + author + ", ISBN: " + isbn + ",대출 가능 여부: " + (user == null ? "가능" : "불가능");
     }
 
     public void isReturn() {

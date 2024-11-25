@@ -27,12 +27,10 @@ public class UserService {
             System.out.println("일치하는 id가 없습니다.");
             return;
         }
-
         if (!user.checkPassword(password)) {
             System.out.println("비밀번호가 일치하지 않습니다.");
             return;
         }
-
         System.out.println("로그인에 성공했습니다.");
         showViewAfterLogin(view, user);
     }
