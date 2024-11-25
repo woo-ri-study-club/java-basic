@@ -1,5 +1,6 @@
 package me.sungbin.core;
 
+import me.sungbin.book.BookManager;
 import me.sungbin.user.UserManager;
 
 import java.util.Scanner;
@@ -7,8 +8,8 @@ import java.util.Scanner;
 public class LibrarySystem {
 
     private final Scanner scanner = new Scanner(System.in);
-
     private final UserManager userManager = new UserManager();
+    private final BookManager bookManager = new BookManager();
 
     public void start() {
 
