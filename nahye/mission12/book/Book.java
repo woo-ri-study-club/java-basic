@@ -1,4 +1,4 @@
-package mission12;
+package mission12.book;
 
 public class Book {
     private String title;
@@ -21,27 +21,26 @@ public class Book {
         return this.title.equals(title);
     }
 
-    public void borrow(){
+    public void borrow() {
         this.isBorrowed = true;
     }
 
-    public boolean isNotBorrowed(){
+    public boolean isNotBorrowed() {
         return !isBorrowed;
     }
 
-    public boolean isBorrowed(){
+    public boolean isBorrowed() {
         return this.isBorrowed;
     }
 
     public void enrollBorrowedId(String id) {
         this.borrowedId = id;
     }
-    
-    
+
 
     @Override
     public String toString() {
-        return "제목: " + title + ", 저자: " +author+", ISBN: "+isbn;
+        return "제목: " + title + ", 저자: " + author + ", ISBN: " + isbn;
     }
 
     public void isReturn() {
@@ -53,4 +52,7 @@ public class Book {
         return this.borrowedId.equals(id);
     }
 
+    public boolean hasSameIsbn(String isbn) {
+        return this.isbn.equals(isbn);
+    }
 }

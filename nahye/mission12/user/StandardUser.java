@@ -1,4 +1,5 @@
-package mission12;
+package mission12.user;
+import mission12.book.Book;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,21 @@ public class StandardUser implements User {
         this.borrowed = false;
     }
 
+    public void enrollBorrowedBook(Book book) {
+        this.borrowedBooks.add(book);
+    }
+
+    public void removeBorrowedBook(Book book) {
+        this.borrowedBooks.remove(book);
+    }
+
+    public boolean hasBorrowedBook() {
+        if (!this.borrowedBooks.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String getId() {
         return id;
@@ -42,25 +58,10 @@ public class StandardUser implements User {
         return this.password.equals(password);
     }
 
-    public void enrollBorrowedBook(Book book){
-        this.borrowedBooks.add(book);
-    }
-
-    public boolean hasBorrowedBook(){
-        if(!this.borrowedBooks.isEmpty()){
-            return true;
-        }
-        return false;
-    }
-
     @Override
     public String toString() {
-        return "회원 ID: "+ id +
+        return "회원 ID: " + id +
                 ", 회원 이름: " + name +
                 ", 빌린 책: " + borrowedBooks;
-    }
-
-    public void removeBorrowedBook(Book book) {
-        this.borrowedBooks.remove(book);
     }
 }

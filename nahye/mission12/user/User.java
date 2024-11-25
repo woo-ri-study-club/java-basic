@@ -1,4 +1,4 @@
-package mission12;
+package mission12.user;
 
 public interface User {
     public String name = "";
@@ -7,11 +7,11 @@ public interface User {
 
 
     public String getId();
+
     public String getName();
+
     public boolean hasUserById(String id);
 
 
     public boolean checkPassword(String password);
-
-
 }

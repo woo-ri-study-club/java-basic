@@ -1,6 +1,7 @@
-package mission12;
+package mission12.user;
 
-public class AdminUser implements User{
+
+public class AdminUser implements User {
     private String id;
     private String password;
     private String name;
