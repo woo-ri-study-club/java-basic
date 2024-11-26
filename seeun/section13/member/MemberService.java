@@ -30,8 +30,15 @@ public class MemberService {
     public void login() {
         LoginData loginData = Console.loginConsole();
         BaseMember loginMember = findMemberById(loginData.getId());
-        loginMember.verifyPassword(loginData.getPassword());
-        session.registLoginMember(loginMember);
+        validatePassword(loginMember, loginData);
+    }
+
+    private void validatePassword(BaseMember loginMember, LoginData loginData) {
+        if(loginMember.verifyPassword(loginData.getPassword())){
+            session.registLoginMember(loginMember);
+            return;
+        }
+        throw new IllegalArgumentException("옳지 않은 비밀번호입니다.");
     }
 
     public void logout() {
