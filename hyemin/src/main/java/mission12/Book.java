@@ -6,8 +6,6 @@ public class Book {
     private String title;
     private String author;
     private String isbn;
-
-
     private boolean isAvailable;
 
     public Book(String title, String author, String isbn) {
@@ -17,12 +15,16 @@ public class Book {
         isAvailable = true;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public void markAsUnavailable() {
+        isAvailable = false;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public void markAsAvailable() {
+        isAvailable = true;
+    }
+
+    public boolean isNotAvailable() {
+        return !isAvailable;
     }
 
     public String getTitle() {

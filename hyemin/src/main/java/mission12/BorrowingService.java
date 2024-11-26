@@ -15,10 +15,10 @@ public class BorrowingService {
 
     public void borrowBook(User user, String isbn) {
         Book book = bookRepository.findByIsbn(isbn);
-        if (!book.isAvailable()) {
+        if (book.isNotAvailable()) {
             throw new IllegalStateException("대출 불가능한 책입니다.");
         }
-        book.setAvailable(false);
+        book.markAsUnavailable();
         borrowedBooks.computeIfAbsent(user, k -> new ArrayList<>()).add(book);
     }
 
@@ -26,11 +26,15 @@ public class BorrowingService {
         Book bookToReturn = bookRepository.findByIsbn(isbn);
         List<Book> borrowed = borrowedBooks.get(user);
 
-        if (borrowed == null || !borrowed.contains(bookToReturn)) {
+        if (borrowed == null) {
+            throw new IllegalArgumentException("대출한 책이 없습니다.");
+        }
+
+        if (!borrowed.contains(bookToReturn)) {
             throw new IllegalArgumentException("대출하지 않은 책입니다.");
         }
 
-        bookToReturn.setAvailable(true);
+        bookToReturn.markAsAvailable();
         borrowed.remove(bookToReturn);
     }
 

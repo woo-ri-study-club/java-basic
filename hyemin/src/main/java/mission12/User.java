@@ -19,10 +19,10 @@ public abstract class User {
         return id;
     }
 
-    public boolean checkPassword(String password) {
-        return this.password.equals(password);
+    public boolean isPasswordInvalid(String password) {
+        return !this.password.equals(password);
     }
 
-    public abstract boolean isAdmin();
+    public abstract boolean isNotAdmin();
 
 }

@@ -7,7 +7,7 @@ public class RegularUser extends User {
     }
 
     @Override
-    public boolean isAdmin() {
-        return false;
+    public boolean isNotAdmin() {
+        return true;
     }
 }

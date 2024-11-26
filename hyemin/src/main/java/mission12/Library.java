@@ -6,14 +6,13 @@ import java.util.Map;
 public class Library {
     private final String systemPassword;
     private final BookRepository bookRepository;
-    private final UserRepository userRepository;
+    private final AuthService authService;
     private final BorrowingService borrowingService;
-    private User loggedInUser;
 
     public Library(String systemPassword) {
         this.systemPassword = systemPassword;
         this.bookRepository = new BookRepository();
-        this.userRepository = new UserRepository();
+        this.authService = new AuthService();
         this.borrowingService = new BorrowingService(bookRepository);
     }
 
@@ -22,22 +21,15 @@ public class Library {
     }
 
     public void register(User user) {
-        userRepository.add(user);
+        authService.getUserRepository().add(user);
     }
 
     public void login(String id, String password) {
-        User user = userRepository.findById(id);
-        if (!user.checkPassword(password)) {
-            throw new IllegalArgumentException("패스워드를 확인해주세요.");
-        }
-        loggedInUser = user;
-        System.out.println("로그인 성공");
+        authService.login(id, password);
     }
 
     public void logout() {
-        validateLogin();
-        System.out.println(loggedInUser.getName() + "님이 로그아웃 되었습니다.");
-        loggedInUser = null;
+        authService.logout();
     }
 
     public void addBook(Book newBook) {
@@ -51,20 +43,20 @@ public class Library {
     }
 
     public void borrowBook(String isbn) {
-        validateLogin();
-        borrowingService.borrowBook(loggedInUser, isbn);
+        authService.validateLogin();
+        borrowingService.borrowBook(authService.getLoggedInUser(), isbn);
         System.out.println("책이 대출되었습니다: " + bookRepository.findByIsbn(isbn).getTitle());
     }
 
     public void returnBook(String isbn) {
-        validateLogin();
-        borrowingService.returnBook(loggedInUser, isbn);
+        authService.validateLogin();
+        borrowingService.returnBook(authService.getLoggedInUser(), isbn);
         System.out.println("책이 반납되었습니다: " + bookRepository.findByIsbn(isbn).getTitle());
     }
 
     public void viewBorrowedBooks() {
-        validateLogin();
-        List<Book> borrowed = borrowingService.getBorrowedBooks(loggedInUser);
+        authService.validateLogin();
+        List<Book> borrowed = borrowingService.getBorrowedBooks(authService.getLoggedInUser());
         if (borrowed.isEmpty()) {
             System.out.println("대출한 책이 없습니다.");
         } else {
@@ -73,7 +65,7 @@ public class Library {
     }
 
     public void viewBorrowingUsers() {
-        validateLogin();
+        authService.validateLogin();
         validateAdminAccess();
 
         Map<User, List<Book>> status = borrowingService.getAllBorrowingStatus();
@@ -85,18 +77,11 @@ public class Library {
     }
 
     public User getLoggedInUser() {
-        return loggedInUser;
-    }
-
-    private void validateLogin() {
-        if (loggedInUser == null) {
-            throw new IllegalStateException("로그인이 필요합니다.");
-        }
+        return authService.getLoggedInUser();
     }
 
     private void validateAdminAccess() {
-        validateLogin();
-        if (!(loggedInUser instanceof AdminUser)) {
+        if (authService.isNotAdmin()) {
             throw new IllegalStateException("관리자 권한이 필요합니다.");
         }
     }

@@ -69,49 +69,41 @@ public class LibraryMain {
 
     private static User createUserBasedOnRole(Scanner scanner, String name, String id, String password) {
         System.out.print("관리자이면 O를 입력하세요: ");
-        String isAdmin = scanner.nextLine();
-
-        if (isAdmin.equalsIgnoreCase("O")) {
-            System.out.println("관리자로 회원가입합니다.");
-            return new AdminUser(name, id, password);
-        } else {
-            System.out.println("일반 회원으로 가입합니다.");
-            return new RegularUser(name, id, password);
-        }
+        return scanner.nextLine().equalsIgnoreCase("O")
+                ? new AdminUser(name, id, password)
+                : new RegularUser(name, id, password);
     }
 
     private static boolean promptForAdminPassword(Library library, Scanner scanner) {
         System.out.print("시스템 비밀번호 입력: ");
-        String systemPassword = scanner.nextLine();
-        return library.checkSystemPassword(systemPassword);
+        return library.checkSystemPassword(scanner.nextLine());
     }
 
     private static void loginUser(Library library, Scanner scanner) {
-        System.out.print("ID: ");
-        String id = scanner.nextLine();
-        System.out.print("비밀번호: ");
-        String password = scanner.nextLine();
+        String id = promptForInput(scanner, "ID: ");
+        String password = promptForInput(scanner, "비밀번호: ");
 
         try {
             library.login(id, password);
-            User loggedInUser = library.getLoggedInUser();
-            userMenu(library, scanner, loggedInUser);
+            userMenu(library, scanner);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    private static void userMenu(Library library, Scanner scanner, User loggedInUser) {
+    private static void userMenu(Library library, Scanner scanner) {
+        User loggedInUser = library.getLoggedInUser();
+
         while (loggedInUser != null) {
             displayMenu(loggedInUser);
             int choice = scanner.nextInt();
             scanner.nextLine();
 
             try {
-                if (loggedInUser.isAdmin()) {
-                    loggedInUser = handleAdminChoice(choice, library, scanner);
+                if (loggedInUser.isNotAdmin()) {
+                    handleUserChoice(choice, library, scanner);
                 } else {
-                    loggedInUser = handleUserChoice(choice, library, scanner);
+                    handleAdminChoice(choice, library, scanner);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -121,14 +113,7 @@ public class LibraryMain {
     }
 
     private static void displayMenu(User user) {
-        if (user.isAdmin()) {
-            System.out.println("\n=== 관리자 메뉴 ===");
-            System.out.println("1. 책 등록");
-            System.out.println("2. 책 조회");
-            System.out.println("3. 대출 회원 목록 조회");
-            System.out.println("4. 로그아웃");
-            System.out.print("선택: ");
-        } else {
+        if (user.isNotAdmin()) {
             System.out.println("\n=== 회원 메뉴 ===");
             System.out.println("1. 책 조회");
             System.out.println("2. 책 대출");
@@ -136,10 +121,17 @@ public class LibraryMain {
             System.out.println("4. 대출 목록 조회");
             System.out.println("5. 로그아웃");
             System.out.print("선택: ");
+        } else {
+            System.out.println("\n=== 관리자 메뉴 ===");
+            System.out.println("1. 책 등록");
+            System.out.println("2. 책 조회");
+            System.out.println("3. 대출 회원 목록 조회");
+            System.out.println("4. 로그아웃");
+            System.out.print("선택: ");
         }
     }
 
-    private static User handleAdminChoice(int choice, Library library, Scanner scanner) {
+    private static void handleAdminChoice(int choice, Library library, Scanner scanner) {
         switch (choice) {
             case 1:
                 addBook(library, scanner);
@@ -156,10 +148,9 @@ public class LibraryMain {
             default:
                 System.out.println("잘못된 선택입니다.");
         }
-        return library.getLoggedInUser();
     }
 
-    private static User handleUserChoice(int choice, Library library, Scanner scanner) {
+    private static void handleUserChoice(int choice, Library library, Scanner scanner) {
         switch (choice) {
             case 1:
                 library.displayBooks();
@@ -179,28 +170,22 @@ public class LibraryMain {
             default:
                 System.out.println("잘못된 선택입니다.");
         }
-        return library.getLoggedInUser();
     }
 
     private static void borrowBook(Library library, Scanner scanner) {
         System.out.print("대출할 ISBN: ");
-        String borrowIsbn = scanner.nextLine();
-        library.borrowBook(borrowIsbn);
+        library.borrowBook(scanner.nextLine());
     }
 
     private static void returnBook(Library library, Scanner scanner) {
         System.out.print("반납할 ISBN: ");
-        String returnIsbn = scanner.nextLine();
-        library.returnBook(returnIsbn);
+        library.returnBook(scanner.nextLine());
     }
 
     private static void addBook(Library library, Scanner scanner) {
-        System.out.print("제목: ");
-        String title = scanner.nextLine();
-        System.out.print("저자: ");
-        String author = scanner.nextLine();
-        System.out.print("ISBN: ");
-        String isbn = scanner.nextLine();
+        String title = promptForInput(scanner, "제목: ");
+        String author = promptForInput(scanner, "저자: ");
+        String isbn = promptForInput(scanner, "ISBN: ");
         library.addBook(new Book(title, author, isbn));
     }
 }
