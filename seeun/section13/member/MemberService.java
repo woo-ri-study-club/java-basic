@@ -9,7 +9,11 @@ import java.util.*;
 public class MemberService {
 
     private static Map<String, BaseMember> members = new HashMap<>();
-    private Session session;
+    private final Session session;
+
+    public MemberService() {
+        this.session = Session.getInstance();
+    }
 
     public void register() {
         RegistData registData = Console.registConsole();
@@ -57,5 +61,9 @@ public class MemberService {
         if (!AdminConifg.ADMIN_KEY.equals(key)) {
             throw new IllegalArgumentException("관리자 키가 올바르지 않습니다.");
         }
+    }
+
+    public BaseMember getLoginMember() {
+        return session.getLoginMember();
     }
 }
