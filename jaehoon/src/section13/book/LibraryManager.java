@@ -25,7 +25,7 @@ public interface LibraryManager {
   void viewBorrowedBooks(User user);
 
   // 책 등록 (관리자 전용)
-  void addBook(Book book);
+  void addBook(String isbn, String title, String author);
 
   // 책 삭제 (관리자 전용)
   void deleteBook(Book book);

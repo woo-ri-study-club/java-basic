@@ -22,12 +22,14 @@ public class AdminLibraryManager implements LibraryManager {
   }
 
   @Override
-  public void addBook(Book book) {
-    if (books.containsKey(book.getIsbn())) {
+  public void addBook(String isbn, String title, String author) {
+    if (books.containsKey(isbn)) {
       throw new IllegalArgumentException("이미 존재하는 ISBN입니다.");
     }
-    books.put(book.getIsbn(), book);
+    Book newBook = new Book(isbn, title, author);
+    books.put(newBook.getIsbn(), newBook);
     library.saveBook(books);
+    System.out.println("등록이 완료되었습니다: " + newBook);
   }
 
   @Override

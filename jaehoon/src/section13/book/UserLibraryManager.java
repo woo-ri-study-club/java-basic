@@ -98,7 +98,7 @@ public class UserLibraryManager implements LibraryManager {
   }
 
   @Override
-  public void addBook(Book book) {
+  public void addBook(String isbn, String title, String author) {
     throw new IllegalArgumentException("유저는 도서를 추가할 수 없습니다.");
   }
 

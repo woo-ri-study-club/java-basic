@@ -39,6 +39,7 @@ public class LibrarySystem {
         processUserMenu(scanner);
         continue;
       }
+      return;
     }
   }
 
@@ -54,9 +55,7 @@ public class LibrarySystem {
           String name = scanner.nextLine();
           System.out.print("사용할 비밀번호를 입력하세요: ");
           String password = scanner.nextLine();
-
-          User newUser = new User(id, name, password, false);
-          authManager.signUp(newUser);
+          authManager.signUp(id, name, password, false);
 
         }
         case 2 -> {
@@ -65,21 +64,14 @@ public class LibrarySystem {
           String id = scanner.nextLine();
           System.out.print("패스워드를 입력하세요: ");
           String password = scanner.nextLine();
-
           sessionUser = authManager.signIn(id, password);
           settingLibraryManager();
           if (!sessionUser.isAdmin()) {
             sessionUser.setBorrowedBooks(libraryManager.getBorrowedBooksByUserId(id));
           }
         }
-        case 3 -> {
-          // 종료
-          System.out.println("프로그램 종료.");
-          System.exit(0);
-        }
-        default -> {
-          System.out.println("잘못된 선택입니다.");
-        }
+        case 3 -> systemExit();
+        default -> throw new UnsupportedOperationException("잘못된 선택입니다.");
       }
     } catch (NumberFormatException numberFormatException) {
       System.out.println("숫자를 입력해주세요.");
@@ -88,15 +80,18 @@ public class LibrarySystem {
     }
   }
 
+  private static void systemExit() {
+    // 종료
+    System.out.println("프로그램 종료.");
+    System.exit(0);
+  }
+
   private static void processUserMenu(Scanner scanner) {
     try {
       int choice = scanner.nextInt();
       scanner.nextLine();
       switch (choice) {
-        case 1 -> {
-          // 등록된 모든 책조회
-          libraryManager.viewAllBooks();
-        }
+        case 1 -> libraryManager.viewAllBooks(); // 등록된 모든 책조회
         case 2 -> {
           // 책 대출
           System.out.print("대출할 책의 isbn을 입력하세요:");
@@ -115,7 +110,7 @@ public class LibrarySystem {
           sessionUser = null;
           libraryManager = null;
         }
-        default -> System.out.println("잘못된 선택입니다.");
+        default -> throw new UnsupportedOperationException("잘못된 선택입니다.");
       }
     } catch (Exception exception) {
       System.out.println(exception.getMessage());
@@ -138,25 +133,16 @@ public class LibrarySystem {
 
           System.out.print("등록할 책의 isbn을 입력하세요: ");
           String isbn = scanner.nextLine();
-          Book newBook = new Book(isbn, title, author);
-          libraryManager.addBook(newBook);
-          System.out.println("등록이 완료되었습니다: " + newBook);
+          libraryManager.addBook(isbn, title, author);
         }
-        case 2 -> {
-          // 등록된 모든 책조회
-          libraryManager.viewAllBooks();
-        }
-        case 3 -> {
-          // 대출 회원 목록 조회
-          libraryManager.viewBorrowedUserIds();
-
-        }
+        case 2 -> libraryManager.viewAllBooks(); // 등록된 모든 책조회
+        case 3 -> libraryManager.viewBorrowedUserIds(); // 대출 회원 목록 조회
         case 4 -> {
           // 로그아웃
           sessionUser = null;
           libraryManager = null;
         }
-        default -> System.out.println("잘못된 선택입니다.");
+        default -> throw new UnsupportedOperationException("잘못된 선택입니다.");
       }
     } catch (Exception exception) {
       System.out.println(exception.getMessage());
