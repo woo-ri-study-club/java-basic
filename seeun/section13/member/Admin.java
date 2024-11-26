@@ -1,6 +1,10 @@
 package section13.member;
 
 public class Admin extends BaseMember {
+    public Admin(String id, String name, String password) {
+        super(id, name, password);
+    }
+
     @Override
     public void displayMenu() {
         System.out.println("=== 관리자 메뉴 ===");

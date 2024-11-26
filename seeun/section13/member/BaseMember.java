@@ -6,6 +6,15 @@ public abstract class BaseMember {
     private String password;
     private boolean isAdmin;
 
+    public BaseMember() {
+    }
+
+    public BaseMember(String id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+
     abstract void displayMenu();
 
     boolean isAdmin() {

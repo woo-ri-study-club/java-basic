@@ -2,6 +2,10 @@ package section13.member;
 
 public class Member extends BaseMember {
 
+    public Member(String id, String name, String password) {
+        super(id, name, password);
+    }
+
     @Override
     public void displayMenu() {
         System.out.println("=== 회원 메뉴 ===");
