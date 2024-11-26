@@ -1,6 +1,10 @@
 package section13.member;
 
 public class Guest extends BaseMember {
+    public Guest() {
+        super(null, null, null);
+    }
+
     @Override
     public void displayMenu() {
         System.out.println("=== 도서 관리 시스템 ===");

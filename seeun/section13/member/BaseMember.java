@@ -5,9 +5,6 @@ public abstract class BaseMember {
     private String name;
     private String password;
 
-    public BaseMember() {
-    }
-
     public BaseMember(String id, String name, String password) {
         this.id = id;
         this.name = name;
