@@ -26,28 +26,23 @@ public class UserManager {
         userRepository.put(user.getUserId(), user);
     }
 
-    public User loginUser(String userId, String password) {
+    public void loginUser(String userId, String password) {
         if (userId.equals(ADMIN_ID) && password.equals(ADMIN_PASSWORD)) {
             User user = new Admin("관리자", userId, password);
 
             sessionManager.createSession(user);
             System.out.println(user.getUserId() + "님 환영합니다.");
-            return user;
+            return;
         }
 
         User user = userRepository.get(userId);
 
-        if (isNull(user)) {
-            throw new IllegalArgumentException("아이디 혹은 비밀번호가 잘못되었습니다.");
-        }
-
-        if (user.isNotSamePassword(password)) {
+        if (isNull(user) ||user.isNotSamePassword(password)) {
             throw new IllegalArgumentException("아이디 혹은 비밀번호가 잘못되었습니다.");
         }
 
         sessionManager.createSession(user);
         System.out.println(user.getUserId() + "님 환영합니다.");
-        return user;
     }
 
     public void displayBorrowedBooks(Member member) {
@@ -65,4 +60,11 @@ public class UserManager {
         sessionManager.removeSession();
     }
 
+    public boolean hasActiveSession() {
+        return sessionManager.getSessionUser().isPresent();
+    }
+
+    public User getCurrentSessionUser() {
+        return sessionManager.getSessionUserOrThrow();
+    }
 }

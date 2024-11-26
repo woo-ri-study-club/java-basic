@@ -2,22 +2,25 @@ package mission12.manager;
 
 import mission12.domain.User;
 
-import static java.util.Objects.isNull;
+import java.util.Optional;
+
 import static java.util.Objects.nonNull;
 
 public class SessionManager {
-    private User currentUser = null;
+    private User currentUser;
 
     public void createSession(User user){
         currentUser = user;
     }
 
-    public User getSessionUser(String sessionId){
+    public Optional<User> getSessionUser() {
+        return Optional.ofNullable(currentUser);
+    }
 
-        if (isNull(currentUser)){
-            throw new IllegalArgumentException("만료된 세션 혹은 존재하지 않는 세션입니다.");
+    public User getSessionUserOrThrow() {
+        if (currentUser == null) {
+            throw new IllegalStateException("세션이 만료되었습니다. 다시 로그인하세요.");
         }
-
         return currentUser;
     }
 

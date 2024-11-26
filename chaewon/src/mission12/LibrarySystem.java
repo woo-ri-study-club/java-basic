@@ -22,86 +22,122 @@ public class LibrarySystem {
     }
 
     public void run() {
-        while (isProgress) {
-            try {
-                showInitialMenu();
+        try {
+            while (isProgress) {
+                if (userManager.hasActiveSession()) {
+                    User currentUser = userManager.getCurrentSessionUser();
 
-                switch (selectMenuNumber()) {
-                    case 1:
-                        signUp();
-                        break;
-                    case 2:
-                        User loginUser = signIn();
-
-                        if (loginUser instanceof Member loginMember) {
-                            handleMemberMenu(loginMember);
-                        } else if (loginUser instanceof Admin) {
-                            handleAdminMenu();
-                        }
-                        break;
-                    case 3:
-                        turnOffProgram();
-                        break;
-                    default:
-                        throw new IllegalArgumentException("올바른 번호 선택이 아닙니다.");
+                    if (currentUser instanceof Member member) {
+                        showMemberMenu();
+                        handleMemberMenu(member);
+                    } else if (currentUser instanceof Admin) {
+                        showAdminMenu();
+                        handleAdminMenu();
+                    } else {
+                        throw new IllegalArgumentException("알 수 없는 사용자입니다.");
+                    }
+                } else {
+                    showInitialMenu();
+                    handleInitialMenu();
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+
             }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void handleInitialMenu() {
+        switch (selectMenuNumber()) {
+            case 1:
+                signUp();
+                break;
+            case 2:
+                signIn();
+                break;
+            case 3:
+                turnOffProgram();
+                break;
+            default:
+                throw new IllegalArgumentException("올바른 번호 선택이 아닙니다.");
         }
     }
 
     private void handleAdminMenu() {
-        boolean adminActive = true;
-
-        while (adminActive) {
-            showAdminMenu();
-            switch (selectMenuNumber()) {
-                case 1:
-                    registerBook();
-                    break;
-                case 2:
-                    bookManager.displayAllBooks();
-                    break;
-                case 3:
-                    bookManager.displayBorrowedBooks();
-                    break;
-                case 4:
-                    userManager.logoutUser();
-                    adminActive = false;
-                    break;
-                default:
-                    throw new IllegalArgumentException("올바른 번호 선택이 아닙니다.");
-            }
+        switch (selectMenuNumber()) {
+            case 1:
+                registerBook();
+                break;
+            case 2:
+                bookManager.displayAllBooks();
+                break;
+            case 3:
+                bookManager.displayBorrowedBooks();
+                break;
+            case 4:
+                userManager.logoutUser();
+                break;
+            default:
+                throw new IllegalArgumentException("올바른 번호 선택이 아닙니다.");
         }
     }
 
     private void handleMemberMenu(Member loginMember) {
-        boolean memberActive = true;
-
-        while (memberActive) {
-            showMemberMenu();
-            switch (selectMenuNumber()) {
-                case 1:
-                    bookManager.displayAllBooks();
-                    break;
-                case 2:
-                    borrowBook(loginMember);
-                    break;
-                case 3:
-                    returnBook(loginMember);
-                    break;
-                case 4:
-                    userManager.displayBorrowedBooks(loginMember);
-                    break;
-                case 5:
-                    userManager.logoutUser();
-                    memberActive = false;
-                    break;
-                default:
-                    throw new IllegalArgumentException("올바른 번호 선택이 아닙니다.");
-            }
+        switch (selectMenuNumber()) {
+            case 1:
+                bookManager.displayAllBooks();
+                break;
+            case 2:
+                borrowBook(loginMember);
+                break;
+            case 3:
+                returnBook(loginMember);
+                break;
+            case 4:
+                userManager.displayBorrowedBooks(loginMember);
+                break;
+            case 5:
+                userManager.logoutUser();
+                break;
+            default:
+                throw new IllegalArgumentException("올바른 번호 선택이 아닙니다.");
         }
+    }
+
+
+    private void showInitialMenu() {
+        System.out.println("======= 도서 관리 시스템 =======");
+        System.out.println("1. 회원가입 | 2. 로그인 | 3. 종료");
+    }
+
+    private void signUp() {
+        System.out.println("======= 회원가입 =======");
+
+        System.out.print("성함: ");
+        String userName = scanner.nextLine();
+        System.out.print("ID: ");
+        String userId = scanner.nextLine();
+        System.out.print("비밀번호: ");
+        String password = scanner.nextLine();
+
+        User user = new Member(userName, userId, password);
+        userManager.addUser(user);
+    }
+
+    private void signIn() {
+        System.out.println("======= 로그인 =======");
+
+        System.out.print("ID: ");
+        String userId = scanner.nextLine();
+        System.out.print("비밀번호: ");
+        String password = scanner.nextLine();
+
+        userManager.loginUser(userId, password);
+    }
+
+    private void showMemberMenu() {
+        System.out.println("======= 회원 메뉴 =======");
+        System.out.println("1. 도서 조회 | 2. 도서 대출 | 3. 도서 반납 | 4. 대출 목록 조회 | 5. 로그아웃");
     }
 
     private void returnBook(Member loginMember) {
@@ -118,6 +154,10 @@ public class LibrarySystem {
         bookManager.borrowBook(loginMember, isbn);
     }
 
+    private void showAdminMenu() {
+        System.out.println("======= 관리자 메뉴 =======");
+        System.out.println("1. 도서 등록 | 2. 도서 조회 | 3. 대출 회원 목록 조회 | 4. 로그아웃");
+    }
 
     private void registerBook() {
         System.out.print("제목: ");
@@ -142,46 +182,6 @@ public class LibrarySystem {
     private void turnOffProgram() {
         System.out.println("프로그램을 종료합니다.");
         isProgress = false;
-    }
-
-    private void showInitialMenu() {
-        System.out.println("======= 도서 관리 시스템 =======");
-        System.out.println("1. 회원가입 | 2. 로그인 | 3. 종료");
-    }
-
-    private void showMemberMenu() {
-        System.out.println("======= 회원 메뉴 =======");
-        System.out.println("1. 도서 조회 | 2. 도서 대출 | 3. 도서 반납 | 4. 대출 목록 조회 | 5. 로그아웃");
-    }
-
-    private void showAdminMenu() {
-        System.out.println("======= 관리자 메뉴 =======");
-        System.out.println("1. 도서 등록 | 2. 도서 조회 | 3. 대출 회원 목록 조회 | 4. 로그아웃");
-    }
-
-    private void signUp() {
-        System.out.println("======= 회원가입 =======");
-
-        System.out.print("성함: ");
-        String userName = scanner.nextLine();
-        System.out.print("ID: ");
-        String userId = scanner.nextLine();
-        System.out.print("비밀번호: ");
-        String password = scanner.nextLine();
-
-        User user = new Member(userName, userId, password);
-        userManager.addUser(user);
-    }
-
-    private User signIn() {
-        System.out.println("======= 로그인 =======");
-
-        System.out.print("ID: ");
-        String userId = scanner.nextLine();
-        System.out.print("비밀번호: ");
-        String password = scanner.nextLine();
-
-        return userManager.loginUser(userId, password);
     }
 }
 
