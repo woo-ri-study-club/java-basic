@@ -9,6 +9,7 @@ import java.util.*;
 public class MemberService {
 
     private static Map<String, BaseMember> members = new HashMap<>();
+    private Session session;
 
     public void register() {
         RegistData registData = Console.registConsole();
@@ -28,14 +29,14 @@ public class MemberService {
         System.out.println("관리자 회원가입이 완료되었습니다");
     }
 
-    public void login(Session session) {
+    public void login() {
         LoginData loginData = Console.loginConsole();
         BaseMember loginMember = findMemberById(loginData.getId());
         loginMember.verifyPassword(loginData.getPassword());
         session.registLoginMember(loginMember);
     }
 
-    public void logout(Session session) {
+    public void logout() {
         session.clear();
     }
 

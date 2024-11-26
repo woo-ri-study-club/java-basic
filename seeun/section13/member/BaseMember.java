@@ -19,4 +19,7 @@ public abstract class BaseMember {
     public boolean verifyPassword(String inputPassword) {
         return password.equals(inputPassword);
     }
+
+    public void selectOption(int option, MemberService memberService) {
+    }
 }

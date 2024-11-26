@@ -17,4 +17,27 @@ public class Member extends BaseMember {
         System.out.print("선택: ");
     }
 
+    @Override
+    public void selectOption(int option, MemberService memberService) {
+        switch (option) {
+            case 1:
+                System.out.println("책 조회");
+                break;
+            case 2:
+                System.out.println("책 대여");
+                break;
+            case 3:
+                System.out.println("책 반납");
+                break;
+            case 4:
+                System.out.println("대출 도서 조회");
+                break;
+            case 5:
+                memberService.logout();
+                break;
+            default:
+                System.out.println("잘못된 입력입니다.");
+                break;
+        }
+    }
 }

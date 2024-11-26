@@ -15,4 +15,23 @@ public class Admin extends BaseMember {
         System.out.print("선택: ");
     }
 
+    @Override
+    public void selectOption(int option, MemberService memberService) {
+        switch (option) {
+            case 1:
+                System.out.println("책 등록");
+                break;
+            case 2:
+                System.out.println("책 조회");
+                break;
+            case 3:
+                System.out.println("대출 도서 회원 목록");
+                break;
+            case 4:
+                memberService.logout();
+                break;
+            default:
+                System.out.println("잘못된 입력입니다.");
+        }
+    }
 }
