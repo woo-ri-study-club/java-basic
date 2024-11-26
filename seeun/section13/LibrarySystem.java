@@ -8,21 +8,16 @@ public class LibrarySystem {
 
     private static final Scanner scanner = new Scanner(System.in);
     private final MemberService memberService;
-//    private final LibraryService libraryService;
     private BaseMember baseMember;
     private static Session session;
-    private boolean running = true;
-
 
     public LibrarySystem() {
         this.memberService = new MemberService();
         session = Session.getInstance();
-
-//        this.libraryService = new LibraryService();
     }
 
     public void run() {
-        while (running) {
+        while (true) {
             baseMember = session.getLoginMember();
             baseMember.displayMenu();
             int option = scanner.nextInt();
@@ -50,7 +45,7 @@ public class LibrarySystem {
                 break;
             case 3:
                 System.out.println("**종료합니다**");
-                running = false;
+                System.exit(0);
                 break;
         }
     }
@@ -58,16 +53,16 @@ public class LibrarySystem {
     private void memberMenu(int option) {
         switch (option) {
             case 1:
-//                libraryService.displayBooks();
+                System.out.println("책 조회");
                 break;
             case 2:
-//                libraryService.checkoutBook();
+                System.out.println("책 대여");
                 break;
             case 3:
-//                libraryService.returnBook();
+                System.out.println("책 반납");
                 break;
             case 4:
-//                libraryService.displayCheckedOutBooks();
+                System.out.println("대출 도서 조회");
                 break;
             case 5:
                 memberService.logout(session);
@@ -81,13 +76,13 @@ public class LibrarySystem {
     private void adminMenu(int option) {
         switch (option) {
             case 1:
-//                libraryService.registerBook();
+                System.out.println("책 등록");
                 break;
             case 2:
-//                libraryService.displayBooks();
+                System.out.println("책 조회");
                 break;
             case 3:
-//                libraryService.checkedOutMemberInfo();
+                System.out.println("대출 도서 회원 목록");
                 break;
             case 4:
                 memberService.logout(session);
