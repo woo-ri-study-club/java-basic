@@ -14,20 +14,17 @@ public class MemberService {
 
     public void register() {
         RegistData registData = Console.registConsole();
-        if(registData.hasKey()){
-            registerAdmin(registData);
-            return;
-        }
-        validateDuplicateId(registData.getId());
-        members.put(registData.getId(), new Member(registData.getId(), registData.getName(), registData.getPassword()));
-        System.out.println("일반 회원가입이 완료되었습니다");
-    }
+        BaseMember newMember;
 
-    private void registerAdmin(RegistData registData) {
-        validateAdminKey(registData.getKey());
         validateDuplicateId(registData.getId());
-        members.put(registData.getId(), new Admin(registData.getId(), registData.getName(), registData.getPassword()));
-        System.out.println("관리자 회원가입이 완료되었습니다");
+        if(registData.hasKey()){
+            validateAdminKey(registData.getKey());
+            newMember = new Admin(registData.getId(), registData.getName(), registData.getPassword());
+        } else{
+            newMember = new Member(registData.getId(), registData.getName(), registData.getPassword());
+        }
+        members.put(registData.getId(), newMember);
+        System.out.println("회원가입이 완료되었습니다");
     }
 
     public void login() {
