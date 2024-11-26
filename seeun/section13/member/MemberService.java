@@ -5,15 +5,12 @@ import section13.member.data.LoginData;
 import section13.member.data.RegistData;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MemberService {
 
-    private static Map<String, BaseMember> members = new HashMap<>();
-    private final Session session;
-
-    public MemberService() {
-        this.session = Session.getInstance();
-    }
+    private final Map<String, BaseMember> members = new ConcurrentHashMap<>();
+    private final Session session = Session.getInstance();
 
     public void register() {
         RegistData registData = Console.registConsole();
@@ -44,20 +41,20 @@ public class MemberService {
         session.clear();
     }
 
-    private static BaseMember findMemberById(String id) {
+    private BaseMember findMemberById(String id) {
         if (!members.containsKey(id)) {
             throw new IllegalArgumentException("존재하지 않는 id입니다.");
         }
         return members.get(id);
     }
 
-    private static void validateDuplicateId(String id) {
+    private void validateDuplicateId(String id) {
         if (members.containsKey(id)) {
             throw new IllegalArgumentException("이미 존재하는 id입니다.");
         }
     }
 
-    private static void validateAdminKey(String key) {
+    private void validateAdminKey(String key) {
         if (!AdminConifg.ADMIN_KEY.equals(key)) {
             throw new IllegalArgumentException("관리자 키가 올바르지 않습니다.");
         }
