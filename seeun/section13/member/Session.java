@@ -1,7 +1,7 @@
 package section13.member;
 
 public class Session {
-    private static final Session instance = new Session();
+    private static volatile Session instance;
     private BaseMember loginMember;
 
     private Session() {
@@ -9,6 +9,13 @@ public class Session {
     }
 
     public static Session getInstance() {
+        if (instance == null) {
+            synchronized (Session.class) {
+                if (instance == null) {
+                    instance = new Session();
+                }
+            }
+        }
         return instance;
     }
 
