@@ -4,7 +4,6 @@ public abstract class BaseMember {
     private String id;
     private String name;
     private String password;
-    private boolean isAdmin;
 
     public BaseMember() {
     }
@@ -15,11 +14,7 @@ public abstract class BaseMember {
         this.password = password;
     }
 
-    abstract void displayMenu();
-
-    boolean isAdmin() {
-        return isAdmin;
-    }
+    public abstract void displayMenu();
 
     public boolean verifyPassword(String inputPassword) {
         return password.equals(inputPassword);
