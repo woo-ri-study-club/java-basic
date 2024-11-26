@@ -20,6 +20,21 @@ public class LibraryService {
         books.add(new Book("book3", "kim", "3333"));
     }
 
+    public void displayAllBooks() {
+        for (Book book : books) {
+            System.out.println(book);
+        }
+    }
+
+    public Book findByTitle(String title) {
+        for (Book book : books) {
+            if (book.hasSameTitle(title)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     public void addBook(Book book) {
         if (checkAlreadyHasSameIsbn(book.getIsbn()))
             return;
@@ -66,21 +81,6 @@ public class LibraryService {
         }
         if (!bookBorrowed) {
             System.out.println("대출한 책이 없습니다.");
-        }
-    }
-
-    public Book findByTitle(String title) {
-        for (Book book : books) {
-            if (book.hasSameTitle(title)) {
-                return book;
-            }
-        }
-        return null;
-    }
-
-    public void displayAllBooks() {
-        for (Book book : books) {
-            System.out.println(book);
         }
     }
 

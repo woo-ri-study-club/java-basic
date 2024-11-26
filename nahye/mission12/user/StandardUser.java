@@ -1,7 +1,6 @@
 package mission12.user;
 
 import mission12.book.Book;
-import mission12.view.MenuView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +11,13 @@ public class StandardUser implements User {
     private String password;
     private String name;
 
-    private boolean borrowed;
-
     private List<Book> borrowedBooks = new ArrayList<>();
 
     public StandardUser(String id, String password, String name) {
         this.id = id;
         this.password = password;
         this.name = name;
-        this.borrowed = false;
     }
-
 
     public void enrollBorrowedBook(Book book) {
         this.borrowedBooks.add(book);
@@ -64,11 +59,6 @@ public class StandardUser implements User {
         return "회원 ID: " + id +
                 ", 회원 이름: " + name +
                 ", 빌린 책: " + borrowedBooks;
-    }
-
-    @Override
-    public void showMenuView(MenuView view) {
-        view.showWhenUserLogin(this);
     }
 
 }

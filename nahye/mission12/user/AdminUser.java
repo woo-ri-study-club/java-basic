@@ -1,8 +1,6 @@
 package mission12.user;
 
 
-import mission12.view.MenuView;
-
 public class AdminUser implements User {
     private String id;
     private String password;
@@ -36,8 +34,4 @@ public class AdminUser implements User {
         return this.password.equals(password);
     }
 
-    @Override
-    public void showMenuView(MenuView view) {
-        view.showWhenAdminLogin(this);
-    }
 }
