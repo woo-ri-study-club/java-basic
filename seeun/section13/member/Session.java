@@ -21,6 +21,6 @@ public class Session {
     }
 
     public void clear() {
-        loginMember = null;
+        loginMember = new Guest();
     }
 }
